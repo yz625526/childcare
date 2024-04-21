@@ -37,21 +37,21 @@ sys.taskInit(function() -- 串口等各类硬件初始化
 
 
 
-    -- mqtt_air780 = mqtt.create(nil,mqtt_host, mqtt_port, mqtt_isssl, ca_file)
-    -- mqtt_air780:autoreconn(true, 3000) -- 自动重连机制
-    -- mqtt_air780:auth(client_id,user_name,password) 
-    -- mqtt_air780:keepalive(60) -- 默认值240s
-    -- mqtt_air780:on(function(mqtt_client, event, data, payload) -- 配置mqtt回调函数
-    --     log.info("mqtt", "状态", event)
-    --     sys.publish("mqtt_conack")
-    --     if event == "sent" then -- 发送完成
-    --         log.info("发送完成")
-    --     end
-    -- end)
-    -- -- sys.wait(1000)
-    -- mqtt_air780:connect() -- 发起连接服务器
-    -- sys.waitUntil("mqtt_conack") -- 等待上面event状态为conack才会解除
-    -- log.info("MQTT初始化和连接完成")
+    mqtt_air780 = mqtt.create(nil,mqtt_host, mqtt_port, mqtt_isssl, ca_file)
+    mqtt_air780:autoreconn(true, 3000) -- 自动重连机制
+    mqtt_air780:auth(client_id,user_name,password) 
+    mqtt_air780:keepalive(60) -- 默认值240s
+    mqtt_air780:on(function(mqtt_client, event, data, payload) -- 配置mqtt回调函数
+        log.info("mqtt", "状态", event)
+        sys.publish("mqtt_conack")
+        if event == "sent" then -- 发送完成
+            log.info("发送完成")
+        end
+    end)
+    -- sys.wait(1000)
+    mqtt_air780:connect() -- 发起连接服务器
+    sys.waitUntil("mqtt_conack") -- 等待上面event状态为conack才会解除
+    log.info("MQTT初始化和连接完成")
 
 
 
@@ -59,15 +59,11 @@ sys.taskInit(function() -- 串口等各类硬件初始化
     uart.setup(1, 115200, 8, 1, uart.None)
     uart.on(1, "receive", function(id, len) -- 串口回调：接收收到的字符串
         local data = uart.read(id, len)
-        -- log.info("UART_receive from " .. id, data)
-        -- sys.publish("UART1_receive", data)
-        -- log.info(topic, data)
-        
         tmp=string.split(data,":")
         -- log.info("str.split", tmp[2])
-        data = "{\"method\":\"thing.service.property.set\",\"params\":{\"IndoorTemperature\":"..tostring(data).."}}"
+        data = "{\"method\":\"thing.service.property.set\",\"params\":{\""..tostring(tmp[1]).."\":"..tostring(tmp[2]).."}}"
         log.info("end-data", data)
-        -- mqtt_air780:publish(mqtt_pub_topic, data,1)
+        mqtt_air780:publish(mqtt_pub_topic, data,1)
     end)
     log.info("串口初始化")
 
