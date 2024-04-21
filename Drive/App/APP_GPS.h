@@ -1,5 +1,5 @@
-#ifndef __GPS_APP_H_
-#define __GPS_APP_H_
+#ifndef __APP_GPS_H_
+#define __APP_GPS_H_
 
 #include "stm32f10x_conf.h"
 
@@ -25,6 +25,7 @@ typedef struct {
 
 } Receive_GPS_data;
 
+extern Receive_GPS_data GNRMC_Info; // USART.c文件中使用的GPS数据结构体
 
 void GPS_APP_init();
 void GPS_read();

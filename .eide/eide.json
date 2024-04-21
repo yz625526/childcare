@@ -17,10 +17,16 @@
             "name": "APP",
             "files": [
               {
+                "path": "Drive/App/APP_GPS.c"
+              },
+              {
+                "path": "Drive/App/APP_UART_Send.c"
+              },
+              {
                 "path": "Drive/App/APP.c"
               },
               {
-                "path": "Drive/App/GPS_APP.c"
+                "path": "Drive/App/Task_use_TIM.c"
               }
             ],
             "folders": []
@@ -54,9 +60,6 @@
               },
               {
                 "path": "Drive/Device/OLED.c"
-              },
-              {
-                "path": "Drive/Device/TIM_TASK.c"
               },
               {
                 "path": "Drive/Device/USART.c"
@@ -224,7 +227,9 @@
         "<virtual_root>/Library/stm32f10x_adc.c",
         "<virtual_root>/Drive/Hardware/ADC.c",
         "<virtual_root>/Library/stm32f10x_rtc.c",
-        "<virtual_root>/Drive/Device/OLED_1_3.c"
+        "<virtual_root>/Drive/Device/OLED_1_3.c",
+        "<virtual_root>/Drive/Device/ATGM336H.c",
+        "<virtual_root>/Drive/Device/AIR780GE.c"
       ],
       "toolchain": "AC5",
       "compileConfig": {

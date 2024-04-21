@@ -173,7 +173,7 @@ void printGpsBuffer()
             dest[22]                      = '\0';
             for (i = 0; i < 22; i++) {
                 if (i <= 7)
-                    dest[i] = GNRMC_Info.latitude[i];
+                    dest[i] = GNRMC_Info.latitude[i];//
                 if (i >= 11 && i <= 19)
                     dest[i] = GNRMC_Info.longitude[i - 11];
             } // 将几个关键数据合到一起通过串口发送

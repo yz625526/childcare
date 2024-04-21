@@ -24,18 +24,19 @@
 #define __STM32F10x_CONF_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "ADC.h"
+// #include "ADC.h"
 #include "USART.h"
 #include "Delay.h"
 #include "OLED.h"
 #include "LED.h"
 #include "IIC.h"
 #include "MPU6050.h"
-#include "ATGM336H.h"
+// #include "ATGM336H.h"
 #include "KEY.h"
 
 // #include "APP.h"
-#include "GPS_APP.h"
+#include "APP_GPS.h"
+#include "APP_UART_Send.h"
 
 
 #include "stdio.h"

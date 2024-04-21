@@ -1,9 +1,10 @@
 #include "USART.h"
-#include "ATGM336H.h"
 #include <stdio.h>
 #include <stdarg.h>
 #include "OLED.h"
 #include "LED.h"
+
+#include "APP_GPS.h"
 
 // 加入以下代码,支持printf函数,而不需要选择use MicroLIB
 #if 0

@@ -1,22 +1,36 @@
-#include "GPS_APP.h"
+#include "APP_GPS.h"
+
+Receive_GPS_data GNRMC_Info; // USART.c文件中使用的GPS数据结构体
+
+float Lat; // 纬度的实际值
+float Lon; // 经度的实际值
+char dest[23];
 
 void ParseGps();
 void printGpsBuffer();
 
-void GPS_APP_init(){
+// GPS调度初始化
+void GPS_APP_init()
+{
+    // 重置标志位
     GNRMC_Info.isGetData   = 0;
     GNRMC_Info.isParseData = 0;
     GNRMC_Info.isUsefull   = 0;
 
+    // 将结构体所有数组清空
     memset(GNRMC_Info.GPS_Buffer, 0, GPS_Buffer_Length);
     memset(GNRMC_Info.UTCTime, 0, UTCTime_Length);
     memset(GNRMC_Info.latitude, 0, latitude_Length);
     memset(GNRMC_Info.N_S, 0, N_S_Length);
     memset(GNRMC_Info.longitude, 0, longitude_Length);
     memset(GNRMC_Info.E_W, 0, E_W_Length);
+
+    USART2_Init(9600);
 }
 
-void GPS_read(){
+// GPS调度核心逻辑
+void GPS_read()
+{
     ParseGps();
     printGpsBuffer();
 }
@@ -168,10 +182,8 @@ void printGpsBuffer()
                     dest[i] = GNRMC_Info.longitude[i - 11];
             } // 将几个关键数据合到一起通过串口发送
 
-            // printf("\r\ndest = ");
-            // printf(dest);
-            USART1_SendString(dest);
-            OLED_ShowString(20, 1, "Send GPS done!");
+            // USART1_SendString(dest);
+            // OLED_ShowString(20, 1, "Send GPS done!");
             // printf("\r\n");
         } else {
             OLED_ShowString(20, 1, "GPS not found..."); // 返回信息无效
