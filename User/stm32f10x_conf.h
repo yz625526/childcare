@@ -34,6 +34,10 @@
 #include "ATGM336H.h"
 #include "KEY.h"
 
+// #include "APP.h"
+#include "GPS_APP.h"
+
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"

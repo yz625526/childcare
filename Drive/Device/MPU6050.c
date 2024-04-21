@@ -111,18 +111,18 @@ void MPU6050_detect()
     // OLED_ShowString(15,1,"AY:");OLED_ShowNum(15,1,AY,6);
     // OLED_ShowString(20,1,"AZ:");OLED_ShowNum(20,1,AZ,6);
 
-    if (abs(AX - AX_later) >= 1000) {
-        // USART2_Printf("warning!");
-        Alarm_open = 1;
-    }
-    if (abs(AY - AY_later) >= 1000) {
-        // USART2_Printf("warning!");
-        Alarm_open = 1;
-    }
-    if (abs(AZ - AZ_later) >= 1000) {
-        // USART2_Printf("warning!");
-        Alarm_open = 1;
-    }
+    // if (abs(AX - AX_later) >= 1000) {
+    //     // USART2_Printf("warning!");
+    //     Alarm_open = 1;
+    // }
+    // if (abs(AY - AY_later) >= 1000) {
+    //     // USART2_Printf("warning!");
+    //     Alarm_open = 1;
+    // }
+    // if (abs(AZ - AZ_later) >= 1000) {
+    //     // USART2_Printf("warning!");
+    //     Alarm_open = 1;
+    // }
     AX_later = AX;
     AY_later = AY;
     AZ_later = AZ;

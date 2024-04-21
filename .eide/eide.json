@@ -14,8 +14,23 @@
         "files": [],
         "folders": [
           {
+            "name": "APP",
+            "files": [
+              {
+                "path": "Drive/App/APP.c"
+              },
+              {
+                "path": "Drive/App/GPS_APP.c"
+              }
+            ],
+            "folders": []
+          },
+          {
             "name": "Device",
             "files": [
+              {
+                "path": "Drive/Device/ADC.c"
+              },
               {
                 "path": "Drive/Device/AIR780GE.c"
               },
@@ -23,10 +38,13 @@
                 "path": "Drive/Device/ATGM336H.c"
               },
               {
-                "path": "Drive/Device/KEY.c"
+                "path": "Drive/Device/Delay.c"
               },
               {
-                "path": "Drive/Device/LCD.c"
+                "path": "Drive/Device/IIC.c"
+              },
+              {
+                "path": "Drive/Device/KEY.c"
               },
               {
                 "path": "Drive/Device/LED.c"
@@ -35,28 +53,13 @@
                 "path": "Drive/Device/MPU6050.c"
               },
               {
-                "path": "Drive/Device/OLED_1_3.c"
-              },
-              {
                 "path": "Drive/Device/OLED.c"
               },
               {
+                "path": "Drive/Device/TIM_TASK.c"
+              },
+              {
                 "path": "Drive/Device/USART.c"
-              }
-            ],
-            "folders": []
-          },
-          {
-            "name": "Hardware",
-            "files": [
-              {
-                "path": "Drive/Hardware/ADC.c"
-              },
-              {
-                "path": "Drive/Hardware/Delay.c"
-              },
-              {
-                "path": "Drive/Hardware/IIC.c"
               }
             ],
             "folders": []
@@ -132,6 +135,15 @@
               },
               {
                 "path": "Drive/Library/stm32f10x_wwdg.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "Task",
+            "files": [
+              {
+                "path": "Drive/Task/Task.c"
               }
             ],
             "folders": []
@@ -276,8 +288,9 @@
           ".cmsis/include",
           ".eide/deps",
           "Drive/Device",
-          "Drive/Hardware",
-          "Drive/Library"
+          "Drive/Library",
+          "Drive/App",
+          "Drive/Task"
         ],
         "libList": [],
         "sourceDirList": [],

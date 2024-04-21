@@ -1,6 +1,7 @@
-#ifndef _ATGM336H_H
-#define _ATGM336H_H
-#include "stm32f10x.h"
+#ifndef __GPS_APP_H_
+#define __GPS_APP_H_
+
+#include "stm32f10x_conf.h"
 
 #define GPS_Buffer_Length 80 // 结构体buffer大小
 #define UTCTime_Length    11
@@ -25,9 +26,7 @@ typedef struct {
 } Receive_GPS_data;
 
 
-
-void ATGM_StructInit();
-void ParseGps();
-void printGpsBuffer();
+void GPS_APP_init();
+void GPS_read();
 
 #endif
