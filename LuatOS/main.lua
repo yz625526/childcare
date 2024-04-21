@@ -7,19 +7,18 @@ sys = require("sys")
 
 -- 用户代码开始---------------------------------------------------
 -- 根据自己阿里云物联网平台的配置修改以下参数，下列参数仅作参考
-local mqtt_host = "a1ZR8uuCkfP.iot-as-mqtt.cn-shanghai.aliyuncs.com" -- 连接地址
+local mqtt_host = "a1C5FkKES9U.iot-as-mqtt.cn-shanghai.aliyuncs.com" -- 连接地址
 local mqtt_port = 1883 -- 连接端口
 local mqtt_isssl = false -- 1883端口表明未加密，不需要打开SSL
-local client_id = "a1ZR8uuCkfP.air780e_test|securemode=2,signmethod=hmacsha256,timestamp=1681048410186|"
-local user_name = "air780e_test&a1ZR81132134"
-local password = "9b075c78b1a600065d28afa0d3b42www.funiot.xy&&www.funiot.xyz"
--- local mqtt_aliyun = nil
-local devdata_topic = "/sys/a1ZR8uuCkfP/air780e_test/thing/event/property/post" -- 订阅属性上报主题
-local cmdrec_topic = "/sys/a1ZR8uuCkfP/air780e_test/thing/service/property/set" -- 订阅属性设置主题
-local dev_control = "thing.service.property.set" -- 订阅属性控制下发主题
-local command_name = "LED_Control" -- 控制命令
-local LED_PIN = 27 -- LED引脚编号
-gpio.setup(LED_PIN, 0, gpio.PULLUP) -- 设置LED上拉输出
+local client_id = "a1C5FkKES9U.Air780E|securemode=2,signmethod=hmacsha256,timestamp=1713678672972|"
+local user_name = "Air780E&a1C5FkKES9U"
+local password = "3431b1fb9a032873da8d3ea4423e25cf1593edbb113e07f1071a172dcc1723b1"
+local devdata_topic = "/sys/a1C5FkKES9U/Air780E/thing/event/property/post" -- 订阅属性上报主题
+-- local cmdrec_topic = "/sys/a1ZR8uuCkfP/air780e_test/thing/service/property/set" -- 订阅属性设置主题
+-- local dev_control = "thing.service.property.set" -- 订阅属性控制下发主题
+-- local command_name = "LED_Control" -- 控制命令
+-- local LED_PIN = 27 -- LED引脚编号
+-- gpio.setup(LED_PIN, 0, gpio.PULLUP) -- 设置LED上拉输出
 
 sys.taskInit(function() -- 联网函数（只运行一次
     local device_id = mcu.unique_id():toHex()
@@ -30,10 +29,6 @@ end)
 
 sys.taskInit(function() -- 串口等各类硬件初始化
     sys.waitUntil("AIR780_power_on") -- 默认都等到联网成功
-    -- local device_id = mcu.unique_id():toHex()
-    -- log.info("unique_id:" .. device_id)
-    -- device_id = mobile.imei()
-    -- log.info("IMEI" .. device_id)
 
 
 
@@ -66,13 +61,6 @@ sys.taskInit(function() -- 串口等各类硬件初始化
         mqtt_air780:publish(topic, data)
     end)
     log.info("串口初始化")
-
-
-
-
-    log.info("开机完成")
-    topic = mqtt_pub_topic
-    mqtt_air780:publish(topic, "初始化完成，开始正常运行")
 
 end)
 
