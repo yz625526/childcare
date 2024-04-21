@@ -1,5 +1,5 @@
 -- LuaTools需要PROJECT和VERSION这两个信息
-PROJECT = "led"
+PROJECT = "Ali_Uart"
 VERSION = "1.0.0"
 
 -- 引入必要的库文件(lua编写), 内部库不需要require
@@ -54,9 +54,6 @@ sys.taskInit(function() -- 串口等各类硬件初始化
         mqtt_air780:publish(mqtt_pub_topic, data, 1)
     end)
     log.info("串口初始化")
-
 end)
--- 用户代码已结束---------------------------------------------
--- 结尾总是这一句
+
 sys.run()
--- sys.run()之后后面不要加任何语句!!!!!
