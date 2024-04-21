@@ -1,0 +1,292 @@
+{
+  "name": "childcare",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "Drive",
+        "files": [],
+        "folders": [
+          {
+            "name": "Device",
+            "files": [
+              {
+                "path": "Drive/Device/AIR780GE.c"
+              },
+              {
+                "path": "Drive/Device/ATGM336H.c"
+              },
+              {
+                "path": "Drive/Device/KEY.c"
+              },
+              {
+                "path": "Drive/Device/LCD.c"
+              },
+              {
+                "path": "Drive/Device/LED.c"
+              },
+              {
+                "path": "Drive/Device/MPU6050.c"
+              },
+              {
+                "path": "Drive/Device/OLED_1_3.c"
+              },
+              {
+                "path": "Drive/Device/OLED.c"
+              },
+              {
+                "path": "Drive/Device/USART.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "Hardware",
+            "files": [
+              {
+                "path": "Drive/Hardware/ADC.c"
+              },
+              {
+                "path": "Drive/Hardware/Delay.c"
+              },
+              {
+                "path": "Drive/Hardware/IIC.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "Library",
+            "files": [
+              {
+                "path": "Drive/Library/misc.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_adc.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_bkp.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_can.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_cec.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_crc.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_dac.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_dbgmcu.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_dma.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_exti.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_flash.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_fsmc.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_gpio.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_i2c.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_iwdg.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_pwr.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_rcc.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_rtc.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_sdio.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_spi.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_tim.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_usart.c"
+              },
+              {
+                "path": "Drive/Library/stm32f10x_wwdg.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "Start",
+        "files": [
+          {
+            "path": "Start/core_cm3.c"
+          },
+          {
+            "path": "Start/core_cm3.h"
+          },
+          {
+            "path": "Start/startup_stm32f10x_md.s"
+          },
+          {
+            "path": "Start/stm32f10x.h"
+          },
+          {
+            "path": "Start/system_stm32f10x.c"
+          },
+          {
+            "path": "Start/system_stm32f10x.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "User",
+        "files": [
+          {
+            "path": "User/headfile.h"
+          },
+          {
+            "path": "User/main.c"
+          },
+          {
+            "path": "User/stm32f10x_conf.h"
+          },
+          {
+            "path": "User/stm32f10x_it.c"
+          },
+          {
+            "path": "User/stm32f10x_it.h"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {
+    "uid": "a76ac0042f3d9fe380d59b3f96469dda"
+  },
+  "targets": {
+    "Target 1": {
+      "excludeList": [
+        "<virtual_root>/Drive/Device/OLED_test.c",
+        "<virtual_root>/Library/stm32f10x_dma.c",
+        "<virtual_root>/Library/stm32f10x_exti.c",
+        "<virtual_root>/Library/stm32f10x_flash.c",
+        "<virtual_root>/Library/stm32f10x_fsmc.c",
+        "<virtual_root>/Library/stm32f10x_i2c.c",
+        "<virtual_root>/Library/stm32f10x_iwdg.c",
+        "<virtual_root>/Library/stm32f10x_pwr.c",
+        "<virtual_root>/Library/stm32f10x_wwdg.c",
+        "<virtual_root>/Library/stm32f10x_spi.c",
+        "<virtual_root>/Library/stm32f10x_sdio.c",
+        "<virtual_root>/Library/stm32f10x_dac.c",
+        "<virtual_root>/Library/stm32f10x_crc.c",
+        "<virtual_root>/Library/stm32f10x_cec.c",
+        "<virtual_root>/Library/stm32f10x_can.c",
+        "<virtual_root>/Library/stm32f10x_adc.c",
+        "<virtual_root>/Drive/Hardware/ADC.c",
+        "<virtual_root>/Library/stm32f10x_rtc.c",
+        "<virtual_root>/Drive/Device/OLED_1_3.c"
+      ],
+      "toolchain": "AC5",
+      "compileConfig": {
+        "cpuType": "Cortex-M3",
+        "floatingPointHardware": "none",
+        "useCustomScatterFile": false,
+        "scatterFilePath": "<YOUR_SCATTER_FILE>.sct",
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x5000"
+              },
+              "isChecked": true,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x08000000",
+                "size": "0x10000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "OpenOCD",
+      "uploadConfig": {
+        "bin": "",
+        "target": "stm32f1x",
+        "interface": "cmsis-dap",
+        "baseAddr": "0x08000000"
+      },
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "null",
+            "cpuName": "null"
+          },
+          "proType": 1,
+          "speed": 8000,
+          "otherCmds": ""
+        }
+      },
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "Start",
+          "User",
+          ".cmsis/include",
+          ".eide/deps",
+          "Drive/Device",
+          "Drive/Hardware",
+          "Drive/Library"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": [
+          "USE_STDPERIPH_DRIVER",
+          "STM32F10X_MD"
+        ]
+      }
+    }
+  },
+  "version": "3.3"
+}
