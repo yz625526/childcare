@@ -48,7 +48,7 @@ sys.taskInit(function() -- 串口等各类硬件初始化
             log.info("发送完成")
         end
     end)
-    sys.wait(1000)
+    -- sys.wait(1000)
     mqtt_air780:connect() -- 发起连接服务器
     sys.waitUntil("mqtt_conack") -- 等待上面event状态为conack才会解除
     log.info("MQTT初始化和连接完成")
@@ -59,26 +59,36 @@ sys.taskInit(function() -- 串口等各类硬件初始化
     uart.setup(1, 115200, 8, 1, uart.None)
     uart.on(1, "receive", function(id, len) -- 串口回调：接收收到的字符串
         local data = uart.read(id, len)
-        log.info("UART_receive from " .. id, data)
-        sys.publish("UART1_receive", data)
-        local topic = mqtt_pub_topic
+        -- log.info("UART_receive from " .. id, data)
+        -- sys.publish("UART1_receive", data)
         log.info(topic, data)
-        mqtt_air780:publish(topic, data)
+        data = "{\"method\":\"thing.service.property.set\",\"params\":{\"IndoorTemperature\":"..tostring(data).."}}"
+        mqtt_air780:publish(mqtt_pub_topic, data,1)
     end)
     log.info("串口初始化")
 
 end)
 
-sys.taskInit(function()
-    sys.wait(5000)
-    temperature=20
-    temperature=temperature+1
-    qos=1
-    data = "{\"method\":\"thing.service.property.set\",\"params\":{\"IndoorTemperature\":"..tostring(temperature).."}}"
-    if mqtt_air780 and mqtt_air780:ready() then
-        mqtt_air780:publish(topic, data,qos)
-    end
-end)
+-- sys.taskInit(function()
+    
+--     temperature=20
+--     qos=1
+--     data = "{\"method\":\"thing.service.property.set\",\"params\":{\"IndoorTemperature\":"..tostring(temperature).."}}"
+--     log.info("进入发送函数")
+--     while true do
+--         sys.wait(5000)
+--         if temperature < 100 then
+--             temperature=temperature+1
+--             log.info(temperature)
+--         else
+--             temperature=0
+--         end
+--         if mqtt_air780 and mqtt_air780:ready() then
+--             mqtt_air780:publish(mqtt_pub_topic, data,qos)
+--             log.info("发送成功")
+--         end
+--     end
+-- end)
 
 -- sys.taskInit(function()
 --     print("connected to aliyun example\r\n")
