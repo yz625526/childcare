@@ -23,6 +23,15 @@
                 "path": "Drive/App/APP_LED.c"
               },
               {
+                "path": "Drive/App/APP_OLED.c"
+              },
+              {
+                "path": "Drive/App/APP_SHT30.c"
+              },
+              {
+                "path": "Drive/App/APP_TIM_refresh.c"
+              },
+              {
                 "path": "Drive/App/APP_UART_Send.c"
               },
               {
