@@ -32,7 +32,8 @@
 #include "IIC.h"
 #include "MPU6050.h"
 // #include "ATGM336H.h"
-#include "KEY.h"
+#include "SHT30.h"
+// #include "KEY.h"
 
 // #include "APP.h"
 #include "APP_GPS.h"

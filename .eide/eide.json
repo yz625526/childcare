@@ -62,6 +62,12 @@
                 "path": "Drive/Device/OLED.c"
               },
               {
+                "path": "Drive/Device/SHT_IIC.c"
+              },
+              {
+                "path": "Drive/Device/SHT30.c"
+              },
+              {
                 "path": "Drive/Device/USART.c"
               }
             ],
@@ -229,7 +235,8 @@
         "<virtual_root>/Library/stm32f10x_rtc.c",
         "<virtual_root>/Drive/Device/OLED_1_3.c",
         "<virtual_root>/Drive/Device/ATGM336H.c",
-        "<virtual_root>/Drive/Device/AIR780GE.c"
+        "<virtual_root>/Drive/Device/AIR780GE.c",
+        "<virtual_root>/Drive/Device/KEY.c"
       ],
       "toolchain": "AC5",
       "compileConfig": {

@@ -1,0 +1,6 @@
+测试环境 STM32F103C8T6核心板
+传感器接线：  
+            SCL       PA7
+            SDA      PA6
+            GND     GND
+            VCC      3.3V
