@@ -25,7 +25,7 @@ int main(void)
     SHT3X_Init(0x44);
     // MPU6050_Init();
     // Key_init();
-    OLED_ShowString(1, 1, "MODE:OFF");
+    // OLED_ShowString(1, 1, "MODE:OFF");
 
     while (1) {
         Delay_ms(200);

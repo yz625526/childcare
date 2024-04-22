@@ -236,7 +236,22 @@
         "<virtual_root>/Drive/Device/OLED_1_3.c",
         "<virtual_root>/Drive/Device/ATGM336H.c",
         "<virtual_root>/Drive/Device/AIR780GE.c",
-        "<virtual_root>/Drive/Device/KEY.c"
+        "<virtual_root>/Drive/Device/KEY.c",
+        "<virtual_root>/Drive/Library/stm32f10x_adc.c",
+        "<virtual_root>/Drive/Library/stm32f10x_can.c",
+        "<virtual_root>/Drive/Library/stm32f10x_cec.c",
+        "<virtual_root>/Drive/Library/stm32f10x_crc.c",
+        "<virtual_root>/Drive/Library/stm32f10x_dac.c",
+        "<virtual_root>/Drive/Library/stm32f10x_dbgmcu.c",
+        "<virtual_root>/Drive/Library/stm32f10x_dma.c",
+        "<virtual_root>/Drive/Library/stm32f10x_flash.c",
+        "<virtual_root>/Drive/Library/stm32f10x_fsmc.c",
+        "<virtual_root>/Drive/Library/stm32f10x_iwdg.c",
+        "<virtual_root>/Drive/Library/stm32f10x_pwr.c",
+        "<virtual_root>/Drive/Library/stm32f10x_rtc.c",
+        "<virtual_root>/Drive/Library/stm32f10x_spi.c",
+        "<virtual_root>/Drive/Library/stm32f10x_wwdg.c",
+        "<virtual_root>/Drive/Device/ADC.c"
       ],
       "toolchain": "AC5",
       "compileConfig": {
