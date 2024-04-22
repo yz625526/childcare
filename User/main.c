@@ -28,7 +28,8 @@ int main(void)
     // OLED_ShowString(1, 1, "MODE:OFF");
 
     while (1) {
-        Delay_ms(200);
+        Delay_ms(100);
+        // OLED_Clear();
         SHT3X_GetTempAndHumi(&temperature, &humidity, REPEATAB_HIGH, MODE_CLKSTRETCH, 50);
         // OLED_ShowString(1, 1, "temperature");
         OLED_ShowNum(10, 1, (int)temperature, 5);
