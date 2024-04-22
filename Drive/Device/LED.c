@@ -6,6 +6,18 @@ void LED_open()
     // GPIO_SetBits(GPIOA, GPIO_Pin_12);
 }
 
+void LED_Blink()
+{
+    uint8_t pinState = GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13);
+
+    // 将C13端口的电平翻转
+    if (pinState == Bit_RESET) {
+        GPIO_SetBits(GPIOC, GPIO_Pin_13);
+    } else {
+        GPIO_ResetBits(GPIOC, GPIO_Pin_13);
+    }
+}
+
 void LED_close()
 {
     GPIO_SetBits(GPIOC, GPIO_Pin_13);

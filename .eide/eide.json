@@ -20,6 +20,9 @@
                 "path": "Drive/App/APP_GPS.c"
               },
               {
+                "path": "Drive/App/APP_LED.c"
+              },
+              {
                 "path": "Drive/App/APP_UART_Send.c"
               },
               {

@@ -4,7 +4,8 @@
 // 调度初始化
 void SYS_Init(void)
 {
-    GPS_APP_init();
+    // GPS_APP_init();
+    APP_LED_init();
 
     Tim_task_init(); // 启动调度
 }

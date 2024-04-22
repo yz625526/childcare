@@ -20,7 +20,7 @@
 static TASK_COMPONENTS Task_Comps[] = {
     // 状态  上电任务启动时间  周期  函数
     //  {0, 5000, 500, Sample_Lamp},        //开始时间：1ms，周期：500ms
-     {0, 200, 3000, GPS_read},     /* task 2 Period： 500ms */
+     {0, 1, 1000, APP_LED_blink},     /* task 2 Period： 500ms */
     //	{0, 20, 20, Sample_INTtoUART},      /* task 3 Period： 20ms */
     //	{0, 1, 1, Sample_RTC},              /* task 4 Period： 1ms */
     //	{0, 1, 1, Sample_I2C_PS},           /* task 5 Period： 1ms */

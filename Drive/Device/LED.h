@@ -6,5 +6,6 @@
 void LED_Init();
 void LED_open();
 void LED_close();
+void LED_Blink();
 
 #endif
