@@ -68,7 +68,7 @@ static u16 SHT3X_CalcRawHumidity(float humidity);
 // 初始化函数
 void SHT3X_Init(u8 i2cAddress)
 {
-    I2c_Init(); // init I2C
+    I2c_Init(); // init I2C-A6=SCL，A7=SDA
     SHT3X_SetI2cAdr(i2cAddress);
 
     // release reset

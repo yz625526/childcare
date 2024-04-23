@@ -47,7 +47,7 @@ uint8_t MPU6050_GetID(void)
 // 传感器上电初始化
 void MPU6050_Init(void)
 {
-    MyI2C_Init();
+    MyI2C_Init();                               // SCL--B10,SDA--B11
     MPU6050_WriteReg(MPU6050_PWR_MGMT_1, 0x00); // 电源管理，典型值：0x00(正常启用)
     // MPU6050_WriteReg(MPU6050_PWR_MGMT_2, 0x00);
     MPU6050_WriteReg(MPU6050_SMPLRT_DIV, 0x07);   // 陀螺仪采样率1k
@@ -57,43 +57,80 @@ void MPU6050_Init(void)
 }
 
 // 得到传感器的数据
-void MPU6050_GetData()
+// void MPU6050_GetData()
+// {
+//     uint8_t DataH, DataL;
+
+//     DataH = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_H);
+//     DataL = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_L);
+//     AX    = (DataH << 8) | DataL;
+
+//     DataH = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_H);
+//     DataL = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_L);
+//     AY    = (DataH << 8) | DataL;
+
+//     DataH = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_H);
+//     DataL = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_L);
+//     AZ    = (DataH << 8) | DataL;
+
+//     DataH = MPU6050_ReadReg(MPU6050_GYRO_XOUT_H);
+//     DataL = MPU6050_ReadReg(MPU6050_GYRO_XOUT_L);
+//     GX    = (DataH << 8) | DataL;
+
+//     DataH = MPU6050_ReadReg(MPU6050_GYRO_YOUT_H);
+//     DataL = MPU6050_ReadReg(MPU6050_GYRO_YOUT_L);
+//     GY    = (DataH << 8) | DataL;
+
+//     DataH = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_H);
+//     DataL = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_L);
+//     GZ    = (DataH << 8) | DataL;
+// }
+
+void MPU6050_GetData(void)
 {
-    uint8_t DataH, DataL;
+    int16_t DataH, DataL;
 
-    DataH = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_H);
-    DataL = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_L);
-    AX    = (DataH << 8) | DataL;
+    DataH             = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_H);
+    DataL             = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_L);
+    MPU6050_Data.AccX = (int16_t)(DataH << 8 | DataL) / 417.96;
 
-    DataH = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_H);
-    DataL = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_L);
-    AY    = (DataH << 8) | DataL;
+    DataH             = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_H);
+    DataL             = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_L);
+    MPU6050_Data.AccY = (int16_t)(DataH << 8 | DataL) / 417.96;
 
-    DataH = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_H);
-    DataL = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_L);
-    AZ    = (DataH << 8) | DataL;
+    DataH             = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_H);
+    DataL             = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_L);
+    MPU6050_Data.AccZ = (int16_t)(DataH << 8 | DataL) / 417.96;
 
-    DataH = MPU6050_ReadReg(MPU6050_GYRO_XOUT_H);
-    DataL = MPU6050_ReadReg(MPU6050_GYRO_XOUT_L);
-    GX    = (DataH << 8) | DataL;
+    DataH              = MPU6050_ReadReg(MPU6050_GYRO_XOUT_H);
+    DataL              = MPU6050_ReadReg(MPU6050_GYRO_XOUT_L);
+    MPU6050_Data.GyroX = (int16_t)(DataH << 8 | DataL) * 0.0005326 + 0.0136;
 
-    DataH = MPU6050_ReadReg(MPU6050_GYRO_YOUT_H);
-    DataL = MPU6050_ReadReg(MPU6050_GYRO_YOUT_L);
-    GY    = (DataH << 8) | DataL;
+    DataH              = MPU6050_ReadReg(MPU6050_GYRO_YOUT_H);
+    DataL              = MPU6050_ReadReg(MPU6050_GYRO_YOUT_L);
+    MPU6050_Data.GyroY = (int16_t)(DataH << 8 | DataL) * 0.0005326 + 0.0167;
 
-    DataH = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_H);
-    DataL = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_L);
-    GZ    = (DataH << 8) | DataL;
+    DataH              = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_H);
+    DataL              = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_L);
+    MPU6050_Data.GyroZ = (int16_t)(DataH << 8 | DataL) * 0.0005326 - 0.0045;
 }
 
-// 启动防盗时6050保存初始数据
-void MPU6050_Alarm_init(void)
+double roll, pitch, yaw;
+
+void MPU6050_Gyro_Attitude_Cal(uint16_t Freq)
 {
-    // Delay_ms(200);        // 先等待200ms
-    MPU6050_GetData(); // 获取一次数据
-    AX_later = AX;
-    AY_later = AY;
-    AZ_later = AZ;
+    MPU6050_GetData();
+    double dx, dy, dz;
+    double c1 = cos(roll), c2 = cos(pitch), c3 = cos(yaw);
+    double s1 = sin(roll), s2 = sin(pitch), s3 = sin(yaw);
+
+    dx = MPU6050_Data.GyroX * (c2 * c3) + MPU6050_Data.GyroY * (c1 * s3 + c3 * s1 * s2) + MPU6050_Data.GyroZ * (s1 * s3 - c1 * c3 * s2);
+    dy = MPU6050_Data.GyroX * (-c2 * s3) + MPU6050_Data.GyroY * (c1 * c3 - s1 * s2 * s3) + MPU6050_Data.GyroZ * (c3 * s1 + c1 * s2 * s3);
+    dz = MPU6050_Data.GyroX * (s2) + MPU6050_Data.GyroY * (-c2 * s1) + MPU6050_Data.GyroZ * (c1 * c2);
+
+    roll += dx / Freq;
+    pitch += dy / Freq;
+    yaw += dz / Freq;
 }
 
 void MPU6050_detect()

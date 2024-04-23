@@ -23,6 +23,9 @@
                 "path": "Drive/App/APP_LED.c"
               },
               {
+                "path": "Drive/App/APP_MPU6050.c"
+              },
+              {
                 "path": "Drive/App/APP_OLED.c"
               },
               {
