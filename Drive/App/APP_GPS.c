@@ -183,11 +183,11 @@ void printGpsBuffer()
             } // 将几个关键数据合到一起通过串口发送
 
             // USART1_SendString(dest);
-            // OLED_ShowString(20, 1, "Send GPS done!");
+            OLED_ShowString(4, 1, "Send GPS done!");
             // printf("\r\n");
         } else {
             // OLED_ShowString(20, 1, "GPS not found..."); // 返回信息无效
-            OLED_ShowString(1, 1, "GPS not found...");
+            OLED_ShowString(4, 1, "GPS not found...");
         }
     }
 }

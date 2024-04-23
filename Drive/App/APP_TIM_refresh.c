@@ -32,8 +32,8 @@ void TIM2_IRQHandler(void)
         // ...
         SHT3X_GetTempAndHumi(&temperature, &humidity, REPEATAB_HIGH, MODE_CLKSTRETCH, 50); // 读取sht30值
         USART1_Printf("IndoorTemperature:%d", (int)temperature);
-        // OLED_ShowNum(1, 1, temperature, 4, 12);
-        // OLED_ShowNum(1, 1, humidity, 4, 12);
+        OLED_ShowNum(1, 1, temperature, 2);
+        OLED_ShowNum(2, 1, humidity, 2);
         // APP_LED_blink();
 
         // 清除中断标志位

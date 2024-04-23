@@ -71,9 +71,6 @@
                 "path": "Drive/Device/MPU6050.c"
               },
               {
-                "path": "Drive/Device/OLED_TEST.c"
-              },
-              {
                 "path": "Drive/Device/OLED.c"
               },
               {

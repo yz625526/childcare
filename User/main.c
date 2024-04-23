@@ -11,13 +11,10 @@ int main(void)
     // float temperature; // temperature [°„C]
     // float humidity;    // relative humidity [%RH]
 
-    // SYS_Init();
-
-    OLED_Init();
+    SYS_Init();
 
     while (1)
     {
-        OLED_ShowString(4, 5, "nihao!");
         // Task_Pro_Handler_Callback();
     }
 
