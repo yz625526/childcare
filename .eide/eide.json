@@ -266,7 +266,7 @@
         "<virtual_root>/Drive/Library/stm32f10x_spi.c",
         "<virtual_root>/Drive/Library/stm32f10x_wwdg.c",
         "<virtual_root>/Drive/Device/ADC.c",
-        "<virtual_root>/Drive/Device/OLED.c"
+        "<virtual_root>/Drive/Device/OLED_TEST.c"
       ],
       "toolchain": "AC5",
       "compileConfig": {

@@ -1,7 +1,8 @@
 #include "OLED_TEST.h"
 #include "stdlib.h"
-#include "oledfont.h"
-#include "delay.h"
+#include "OLED_Font.h"
+#include "Delay.h"
+// #include "delay.h"
 // OLED的显存
 // 存放格式如下.
 //[0]0 1 2 3 ... 127
@@ -137,22 +138,22 @@ void fill_picture(unsigned char fill_Data)
 }
 
 /***********************Delay****************************************/
-void Delay_50ms(unsigned int Del_50ms)
-{
-    unsigned int m;
-    for (; Del_50ms > 0; Del_50ms--)
-        for (m = 6245; m > 0; m--)
-            ;
-}
+// void Delay_50ms(unsigned int Del_50ms)
+// {
+//     unsigned int m;
+//     for (; Del_50ms > 0; Del_50ms--)
+//         for (m = 6245; m > 0; m--)
+//             ;
+// }
 
-void Delay_1ms(unsigned int Del_1ms)
-{
-    unsigned char j;
-    while (Del_1ms--) {
-        for (j = 0; j < 123; j++)
-            ;
-    }
-}
+// void Delay_1ms(unsigned int Del_1ms)
+// {
+//     unsigned char j;
+//     while (Del_1ms--) {
+//         for (j = 0; j < 123; j++)
+//             ;
+//     }
+// }
 
 // 坐标设置
 
@@ -230,13 +231,13 @@ u32 oled_pow(u8 m, u8 n)
     while (n--) result *= m;
     return result;
 }
+
 // 显示2个数字
 // x,y :起点坐标
 // num:数值(0~4294967295);
 // len :数字的位数
 // size:字体大小
 // mode:模式	0,填充模式;1,叠加模式
-
 void OLED_ShowNum(u8 x, u8 y, u32 num, u8 len, u8 size2)
 {
     u8 t, temp;
@@ -253,7 +254,8 @@ void OLED_ShowNum(u8 x, u8 y, u32 num, u8 len, u8 size2)
         OLED_ShowChar(x + (size2 / 2) * t, y, temp + '0', size2);
     }
 }
-// 显示一个字符号串
+
+// 显示一个字符串
 void OLED_ShowString(u8 x, u8 y, u8 *chr, u8 Char_Size)
 {
     unsigned char j = 0;
@@ -267,51 +269,57 @@ void OLED_ShowString(u8 x, u8 y, u8 *chr, u8 Char_Size)
         j++;
     }
 }
-// 显示汉字
-void OLED_ShowCHinese(u8 x, u8 y, u8 no)
-{
-    u8 t, adder = 0;
-    OLED_Set_Pos(x, y);
-    for (t = 0; t < 16; t++) {
-        OLED_WR_Byte(Hzk[2 * no][t], OLED_DATA);
-        adder += 1;
-    }
-    OLED_Set_Pos(x, y + 1);
-    for (t = 0; t < 16; t++) {
-        OLED_WR_Byte(Hzk[2 * no + 1][t], OLED_DATA);
-        adder += 1;
-    }
-}
-/***********功能描述：显示显示BMP图片128×64起始点坐标(x,y),x的范围0～127，y为页的范围0～7*****************/
-void OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char BMP[])
-{
-    unsigned int j = 0;
-    unsigned char x, y;
 
-    if (y1 % 8 == 0)
-        y = y1 / 8;
-    else
-        y = y1 / 8 + 1;
-    for (y = y0; y < y1; y++) {
-        OLED_Set_Pos(x0, y);
-        for (x = x0; x < x1; x++) {
-            OLED_WR_Byte(BMP[j++], OLED_DATA);
-        }
-    }
+// 显示汉字
+// void OLED_ShowCHinese(u8 x, u8 y, u8 no)
+// {
+//     u8 t, adder = 0;
+//     OLED_Set_Pos(x, y);
+//     for (t = 0; t < 16; t++) {
+//         OLED_WR_Byte(Hzk[2 * no][t], OLED_DATA);
+//         adder += 1;
+//     }
+//     OLED_Set_Pos(x, y + 1);
+//     for (t = 0; t < 16; t++) {
+//         OLED_WR_Byte(Hzk[2 * no + 1][t], OLED_DATA);
+//         adder += 1;
+//     }
+// }
+
+/***********功能描述：显示显示BMP图片128×64起始点坐标(x,y),x的范围0～127，y为页的范围0～7*****************/
+// void OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char BMP[])
+// {
+//     unsigned int j = 0;
+//     unsigned char x, y;
+
+//     if (y1 % 8 == 0)
+//         y = y1 / 8;
+//     else
+//         y = y1 / 8 + 1;
+//     for (y = y0; y < y1; y++) {
+//         OLED_Set_Pos(x0, y);
+//         for (x = x0; x < x1; x++) {
+//             OLED_WR_Byte(BMP[j++], OLED_DATA);
+//         }
+//     }
+// }
+
+void OLED_GPIO_Init(void)
+{
+    GPIO_InitTypeDef GPIO_InitStructure;
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); // 使能B端口时钟
+    GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_8 | GPIO_Pin_9;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP; // 推挽输出
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; // 速度50MHz
+    GPIO_Init(GPIOB, &GPIO_InitStructure);            // 初始化GPIOB8,9
+    GPIO_SetBits(GPIOB, GPIO_Pin_8 | GPIO_Pin_9);
 }
 
 // 初始化SSD1306
 void OLED_Init(void)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); // 使能B端口时钟
-    GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_5 | GPIO_Pin_6;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP; // 推挽输出
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; // 速度50MHz
-    GPIO_Init(GPIOB, &GPIO_InitStructure);            // 初始化GPIOB8,9
-    GPIO_SetBits(GPIOB, GPIO_Pin_5 | GPIO_Pin_6);
-
-    Delay_Ms(800);
+    OLED_GPIO_Init();
+    Delay_ms(100);
     OLED_WR_Byte(0xAE, OLED_CMD); //--display off
     OLED_WR_Byte(0x00, OLED_CMD); //---set low column address
     OLED_WR_Byte(0x10, OLED_CMD); //---set high column address

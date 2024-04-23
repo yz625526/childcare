@@ -186,7 +186,8 @@ void printGpsBuffer()
             // OLED_ShowString(20, 1, "Send GPS done!");
             // printf("\r\n");
         } else {
-            OLED_ShowString(20, 1, "GPS not found..."); // 返回信息无效
+            // OLED_ShowString(20, 1, "GPS not found..."); // 返回信息无效
+            OLED_ShowString(1, 1, "GPS not found...");
         }
     }
 }
