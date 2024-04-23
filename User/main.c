@@ -17,7 +17,7 @@ int main(void)
 
     while (1)
     {
-        OLED_ShowString(4, 1, "nihao!");
+        OLED_ShowString(4, 5, "nihao!");
         // Task_Pro_Handler_Callback();
     }
 

@@ -125,7 +125,7 @@ void OLED_Clear(void)
 void OLED_ShowChar(uint8_t Line, uint8_t Column, char Char)
 {
     uint8_t i;
-    OLED_SetCursor((Line - 1) * 2, (Column - 1) * 8); // 设置光标位置在上半部分
+    OLED_SetCursor((Line - 1) * 2, (Column - 1) * 6); // 设置光标位置在上半部分
     for (i = 0; i < 6; i++) {
         OLED_WriteData(F6x8[Char - ' '][i]); // 显示上半部分内容
     }
