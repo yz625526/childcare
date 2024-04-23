@@ -48,7 +48,7 @@ sys.taskInit(function() -- 串口等各类硬件初始化
         local data = uart.read(id, len)
         tmp = string.split(data, ":")
         log.info("str.split", tmp[2])
-        -- data = "{\"method\":\"thing.service.property.set\",\"params\":{\"" .. tostring(tmp[1]) .. "\":" ..tostring(tmp[2]) .. "}}"
+        data = "{\"method\":\"thing.service.property.set\",\"params\":{\"" .. tostring(tmp[1]) .. "\":" ..tostring(tmp[2]) .. "}}"
         log.info("end-data", data)
         mqtt_air780:publish(mqtt_pub_topic, data, 1)
     end)

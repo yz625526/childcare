@@ -4,8 +4,8 @@
 // 调度初始化
 void SYS_Init(void)
 {
-    APP_LED_init();
     APP_OLED_init();
+    APP_LED_init();
     APP_SHT30_init();
     APP_Uart_send_init();
     APP_TIM_init();

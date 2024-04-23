@@ -17,12 +17,13 @@
 //                               本地变量声明
 //========================================================================
 
+// 当前定时20ms一次
 static TASK_COMPONENTS Task_Comps[] = {
     // 状态  上电任务启动时间  周期  函数
-    {0, 1, 1000, APP_LED_blink},   /* task 2 Period： 500ms */
-    // {0, 1, 500, APP_read_sht30},   // 开始时间：1ms，周期：500ms
-    // {0, 1, 2000, Uart_send_AIR780}, /* task 3 Period： 20ms */
-    //	{0, 1, 1, Sample_RTC},              /* task 4 Period： 1ms */
+    {0, 1, 1000, APP_LED_blink},    /* task 2 Period： 500ms */
+    // {0, 1, 5, APP_read_sht30},    // 开始时间：1ms，周期：500ms
+                                  // {0, 1, 2000, Uart_send_AIR780}, /* task 3 Period： 20ms */
+    {0, 1, 200, APP_OLED_refresh}, /* task 4 Period： 1ms */
     //	{0, 1, 1, Sample_I2C_PS},           /* task 5 Period： 1ms */
     //	{0, 1, 1, Sample_SPI_PS},           /* task 6 Period： 1ms */
     // {0, 1, 1, Sample_EEPROM},           /* task 7 Period： 1ms */

@@ -31,10 +31,10 @@ void TIM2_IRQHandler(void)
         // 处理定时器2中断事件
         // ...
         SHT3X_GetTempAndHumi(&temperature, &humidity, REPEATAB_HIGH, MODE_CLKSTRETCH, 50); // 读取sht30值
-        OLED_ShowNum(1, 1, temperature, 3);
-        OLED_ShowNum(10, 1, humidity, 3);
         USART1_Printf("IndoorTemperature:%d", (int)temperature);
-        APP_LED_blink();
+        OLED_ShowNum(1, 1, temperature, 3);
+    OLED_ShowNum(3, 1, humidity, 3);
+        // APP_LED_blink();
 
         // 清除中断标志位
         TIM_ClearITPendingBit(TIM2, TIM_IT_Update);

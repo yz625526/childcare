@@ -11,4 +11,5 @@ void APP_SHT30_init()
 
 void APP_read_sht30()
 {
+    
 }

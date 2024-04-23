@@ -9,4 +9,8 @@ void APP_OLED_init()
 
 void APP_OLED_refresh()
 {
+    SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
+
+    
+    SysTick->CTRL &= SysTick_CTRL_TICKINT_Msk;
 }
