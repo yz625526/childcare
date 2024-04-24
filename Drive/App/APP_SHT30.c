@@ -6,10 +6,9 @@ float humidity;    // relative humidity [%RH]
 
 void APP_SHT30_init()
 {
-    SHT3X_Init(0x44);
+    SHT3X_Init(0x44); // init I2C-A6=SDA，A7=SCL
 }
 
 void APP_read_sht30()
 {
-    
 }

@@ -265,6 +265,7 @@ uint32_t USART1_Pow(uint32_t X, uint32_t Y)
     return Result;
 }
 
+
 void USART1_SendNumber(uint32_t Number, uint8_t Length)
 {
     uint8_t i;

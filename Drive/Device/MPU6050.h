@@ -9,10 +9,12 @@ uint8_t MPU6050_ReadReg(uint8_t RegAddress);
 void MPU6050_Init(void);
 uint8_t MPU6050_GetID(void);
 void MPU6050_GetData();
-void MPU6050_detect();
-void MPU6050_Alarm_init(void);
+void MPU6050_GetData(void);
+void MPU6050_Gyro_Attitude_Cal(uint16_t Freq);
+// void MPU6050_Alarm_init(void);
 
-extern u8 Alarm_open;
+// extern u8 Alarm_open;
+extern double AX, AY, AZ, GX, GY, GZ;
 
 #define MPU6050_SMPLRT_DIV   0x19 // 陀螺仪采样率，典型值：0x07(125Hz)
 #define MPU6050_CONFIG       0x1A // 低通滤波频率，典型值：0x06(5Hz)

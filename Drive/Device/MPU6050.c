@@ -4,8 +4,8 @@
 #include "Delay.h"
 #include "math.h"
 
-int16_t AX, AY, AZ, GX, GY, GZ;
-int16_t AX_later, AY_later, AZ_later;
+double AX, AY, AZ, GX, GY, GZ;
+// int16_t AX_later, AY_later, AZ_later;
 
 void MPU6050_WriteReg(uint8_t RegAddress, uint8_t Data)
 {
@@ -57,63 +57,63 @@ void MPU6050_Init(void)
 }
 
 // 得到传感器的数据
-// void MPU6050_GetData()
+void MPU6050_GetData(void)
+{
+    uint8_t DataH, DataL;
+
+    DataH = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_H);
+    DataL = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_L);
+    AX    = (DataH << 8) | DataL; //此处是16位了
+
+    DataH = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_H);
+    DataL = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_L);
+    AY    = (DataH << 8) | DataL;
+
+    DataH = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_H);
+    DataL = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_L);
+    AZ    = (DataH << 8) | DataL;
+
+    DataH = MPU6050_ReadReg(MPU6050_GYRO_XOUT_H);
+    DataL = MPU6050_ReadReg(MPU6050_GYRO_XOUT_L);
+    GX    = (DataH << 8) | DataL;
+
+    DataH = MPU6050_ReadReg(MPU6050_GYRO_YOUT_H);
+    DataL = MPU6050_ReadReg(MPU6050_GYRO_YOUT_L);
+    GY    = (DataH << 8) | DataL;
+
+    DataH = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_H);
+    DataL = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_L);
+    GZ    = (DataH << 8) | DataL;
+}
+
+// void MPU6050_GetData(void)
 // {
-//     uint8_t DataH, DataL;
+//     int16_t DataH, DataL;
 
 //     DataH = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_H);
 //     DataL = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_L);
-//     AX    = (DataH << 8) | DataL;
+//     AX    = (int16_t)(DataH << 8 | DataL) / 417.96;
 
 //     DataH = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_H);
 //     DataL = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_L);
-//     AY    = (DataH << 8) | DataL;
+//     AY    = (int16_t)(DataH << 8 | DataL) / 417.96;
 
 //     DataH = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_H);
 //     DataL = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_L);
-//     AZ    = (DataH << 8) | DataL;
+//     AZ    = (int16_t)(DataH << 8 | DataL) / 417.96;
 
 //     DataH = MPU6050_ReadReg(MPU6050_GYRO_XOUT_H);
 //     DataL = MPU6050_ReadReg(MPU6050_GYRO_XOUT_L);
-//     GX    = (DataH << 8) | DataL;
+//     GX    = (int16_t)(DataH << 8 | DataL) * 0.0005326 + 0.0136;
 
 //     DataH = MPU6050_ReadReg(MPU6050_GYRO_YOUT_H);
 //     DataL = MPU6050_ReadReg(MPU6050_GYRO_YOUT_L);
-//     GY    = (DataH << 8) | DataL;
+//     GY    = (int16_t)(DataH << 8 | DataL) * 0.0005326 + 0.0167;
 
 //     DataH = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_H);
 //     DataL = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_L);
-//     GZ    = (DataH << 8) | DataL;
+//     GZ    = (int16_t)(DataH << 8 | DataL) * 0.0005326 - 0.0045;
 // }
-
-void MPU6050_GetData(void)
-{
-    int16_t DataH, DataL;
-
-    DataH             = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_H);
-    DataL             = MPU6050_ReadReg(MPU6050_ACCEL_XOUT_L);
-    MPU6050_Data.AccX = (int16_t)(DataH << 8 | DataL) / 417.96;
-
-    DataH             = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_H);
-    DataL             = MPU6050_ReadReg(MPU6050_ACCEL_YOUT_L);
-    MPU6050_Data.AccY = (int16_t)(DataH << 8 | DataL) / 417.96;
-
-    DataH             = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_H);
-    DataL             = MPU6050_ReadReg(MPU6050_ACCEL_ZOUT_L);
-    MPU6050_Data.AccZ = (int16_t)(DataH << 8 | DataL) / 417.96;
-
-    DataH              = MPU6050_ReadReg(MPU6050_GYRO_XOUT_H);
-    DataL              = MPU6050_ReadReg(MPU6050_GYRO_XOUT_L);
-    MPU6050_Data.GyroX = (int16_t)(DataH << 8 | DataL) * 0.0005326 + 0.0136;
-
-    DataH              = MPU6050_ReadReg(MPU6050_GYRO_YOUT_H);
-    DataL              = MPU6050_ReadReg(MPU6050_GYRO_YOUT_L);
-    MPU6050_Data.GyroY = (int16_t)(DataH << 8 | DataL) * 0.0005326 + 0.0167;
-
-    DataH              = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_H);
-    DataL              = MPU6050_ReadReg(MPU6050_GYRO_ZOUT_L);
-    MPU6050_Data.GyroZ = (int16_t)(DataH << 8 | DataL) * 0.0005326 - 0.0045;
-}
 
 double roll, pitch, yaw;
 
@@ -124,9 +124,9 @@ void MPU6050_Gyro_Attitude_Cal(uint16_t Freq)
     double c1 = cos(roll), c2 = cos(pitch), c3 = cos(yaw);
     double s1 = sin(roll), s2 = sin(pitch), s3 = sin(yaw);
 
-    dx = MPU6050_Data.GyroX * (c2 * c3) + MPU6050_Data.GyroY * (c1 * s3 + c3 * s1 * s2) + MPU6050_Data.GyroZ * (s1 * s3 - c1 * c3 * s2);
-    dy = MPU6050_Data.GyroX * (-c2 * s3) + MPU6050_Data.GyroY * (c1 * c3 - s1 * s2 * s3) + MPU6050_Data.GyroZ * (c3 * s1 + c1 * s2 * s3);
-    dz = MPU6050_Data.GyroX * (s2) + MPU6050_Data.GyroY * (-c2 * s1) + MPU6050_Data.GyroZ * (c1 * c2);
+    dx = GX * (c2 * c3) + GY * (c1 * s3 + c3 * s1 * s2) + GZ * (s1 * s3 - c1 * c3 * s2);
+    dy = GX * (-c2 * s3) + GY * (c1 * c3 - s1 * s2 * s3) + GZ * (c3 * s1 + c1 * s2 * s3);
+    dz = GX * (s2) + GY * (-c2 * s1) + GZ * (c1 * c2);
 
     roll += dx / Freq;
     pitch += dy / Freq;
@@ -144,9 +144,9 @@ void MPU6050_detect()
     // USART2_Printf("AY:");USART2_SendNumber(AY,6);USART2_Printf("\n");
     // USART2_Printf("AZ:");USART2_SendNumber(AZ,6);USART2_Printf("\n");
 
-    // OLED_ShowString(10,1,"AX:");OLED_ShowNum(10,1,AX,6);
-    // OLED_ShowString(15,1,"AY:");OLED_ShowNum(15,1,AY,6);
-    // OLED_ShowString(20,1,"AZ:");OLED_ShowNum(20,1,AZ,6);
+    OLED_ShowString(4,1,"AX:");OLED_ShowNum(4,4,AX,6);
+    OLED_ShowString(5,1,"AY:");OLED_ShowNum(5,4,AY,6);
+    OLED_ShowString(6,1,"AZ:");OLED_ShowNum(6,4,AZ,6);
 
     // if (abs(AX - AX_later) >= 1000) {
     //     // USART2_Printf("warning!");
@@ -160,9 +160,9 @@ void MPU6050_detect()
     //     // USART2_Printf("warning!");
     //     Alarm_open = 1;
     // }
-    AX_later = AX;
-    AY_later = AY;
-    AZ_later = AZ;
+    // AX_later = AX;
+    // AY_later = AY;
+    // AZ_later = AZ;
 
     // OLED_ShowString(10,1,"AX:");OLED_ShowNum(10,1,abs(AX - AX_later),6);
     // OLED_ShowString(15,1,"AY:");OLED_ShowNum(15,1,abs(AY - AY_later),6);
