@@ -1,0 +1,27 @@
+[2024-04-24 17:57:08]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+"d:/Sourcetree/STM32F103-childcare/??/MPU6050????/STM32F4DISCOVERY_MPU6050_DMP-master/build/MPU6050 PORT/mpu6050_port.sct", line 7 (column 8): Error: L6236E: No section matches selector - no section to be FIRST/LAST.
+Not enough information to list image symbols.
+Not enough information to list the image map.
+Finished: 2 information, 0 warning and 1 error messages.
+
+
+[2024-04-24 17:58:26]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+"d:/Sourcetree/STM32F103-childcare/??/MPU6050/STM32F4DISCOVERY_MPU6050_DMP-master/build/MPU6050 PORT/mpu6050_port.sct", line 7 (column 8): Error: L6236E: No section matches selector - no section to be FIRST/LAST.
+Not enough information to list image symbols.
+Not enough information to list the image map.
+Finished: 2 information, 0 warning and 1 error messages.
+
+
+[2024-04-24 18:00:25]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+"d:/Sourcetree/STM32F103-childcare/??/MPU6050/STM32F4DISCOVERY_MPU6050_DMP-master/build/MPU6050 PORT/mpu6050_port.sct", line 7 (column 8): Error: L6236E: No section matches selector - no section to be FIRST/LAST.
+Not enough information to list image symbols.
+Not enough information to list the image map.
+Finished: 2 information, 0 warning and 1 error messages.
+
+

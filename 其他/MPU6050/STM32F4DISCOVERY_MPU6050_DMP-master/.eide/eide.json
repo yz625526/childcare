@@ -1,0 +1,387 @@
+{
+  "name": "mpu6050_port",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "::Device",
+        "files": [
+          {
+            "path": "RTE/Device/STM32F407VGTx/system_stm32f4xx.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Delay",
+        "files": [
+          {
+            "path": "Delay/delay.c"
+          },
+          {
+            "path": "Delay/delay.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "I2C",
+        "files": [
+          {
+            "path": "I2C/myiic.c"
+          },
+          {
+            "path": "I2C/myiic.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "inc",
+        "files": [
+          {
+            "path": "inc/main.h"
+          },
+          {
+            "path": "inc/stm32f4xx_conf.h"
+          },
+          {
+            "path": "inc/stm32f4xx_it.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Libraries",
+        "files": [
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/misc.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c"
+          },
+          {
+            "path": "Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "MPU6050",
+        "files": [
+          {
+            "path": "MPU6050/helper_3dmath.h"
+          },
+          {
+            "path": "MPU6050/MPU6050.c"
+          },
+          {
+            "path": "MPU6050/MPU6050.h"
+          },
+          {
+            "path": "MPU6050/MPU6050_6Axis_MotionApps20.c"
+          },
+          {
+            "path": "MPU6050/MPU6050_6Axis_MotionApps20.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "src",
+        "files": [
+          {
+            "path": "src/main.c"
+          },
+          {
+            "path": "src/fputc_debug.c"
+          },
+          {
+            "path": "src/stm32f4xx_it.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "USART",
+        "files": [
+          {
+            "path": "Usart/usart.c"
+          },
+          {
+            "path": "Usart/usart.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Utilities",
+        "files": [
+          {
+            "path": "Utilities/STM32F4-Discovery/stm32f4_discovery.c"
+          },
+          {
+            "path": "Utilities/STM32F4-Discovery/stm32f4_discovery.h"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {
+    "uid": "db43ca23a8a7ce14dd3ca341418e470f"
+  },
+  "targets": {
+    "MPU6050 PORT": {
+      "excludeList": [],
+      "toolchain": "AC5",
+      "compileConfig": {
+        "cpuType": "Cortex-M4",
+        "floatingPointHardware": "single",
+        "scatterFilePath": "",
+        "useCustomScatterFile": false,
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "RAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x20000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x10000000",
+                "size": "0x10000"
+              },
+              "isChecked": false,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "ROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x8000000",
+                "size": "0x100000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            },
+            {
+              "tag": "IROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "null",
+          "cpuName": "null"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "src",
+          "inc",
+          "Libraries/CMSIS/Include",
+          "Libraries/CMSIS/Device/ST/STM32F4xx/Include",
+          "Libraries/STM32F4xx_StdPeriph_Driver/src",
+          "Libraries/STM32F4xx_StdPeriph_Driver/inc",
+          "Utilities/STM32F4-Discovery",
+          "Delay",
+          "I2C",
+          "MPU6050",
+          "Usart",
+          ".cmsis/include",
+          ".eide/deps",
+          "RTE/Device/STM32F407VGTx"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": [
+          "HSE_VALUE=8000000",
+          "STM32F4XX",
+          "USE_STDPERIPH_DRIVER",
+          "USE_STM32F4_DISCOVERY"
+        ]
+      }
+    }
+  },
+  "version": "3.3"
+}
