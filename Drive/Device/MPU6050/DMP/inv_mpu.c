@@ -50,6 +50,7 @@
 //#include "msp430_clock.h"
 //#include "msp430_interrupt.h"
 
+//此处填写必要的读取函数：delayms函数，i2c读写函数.
 #define i2c_write   MPU_Write_Len
 #define i2c_read    MPU_Read_Len
 #define Delay_Ms    Delay_Ms
