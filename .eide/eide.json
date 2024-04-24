@@ -86,7 +86,20 @@
                 "path": "Drive/Device/USART.c"
               }
             ],
-            "folders": []
+            "folders": [
+              {
+                "name": "MPU6050",
+                "files": [
+                  {
+                    "path": "Drive/Device/MPU6050/inv_mpu_dmp_motion_driver.c"
+                  },
+                  {
+                    "path": "Drive/Device/MPU6050/inv_mpu.c"
+                  }
+                ],
+                "folders": []
+              }
+            ]
           },
           {
             "name": "Library",
@@ -332,7 +345,8 @@
           "Drive/Library",
           "Drive/App",
           "Drive/Task",
-          "User"
+          "User",
+          "Drive/Device/MPU6050"
         ],
         "libList": [],
         "sourceDirList": [],
