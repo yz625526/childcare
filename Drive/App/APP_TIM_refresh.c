@@ -34,15 +34,9 @@ void TIM2_IRQHandler(void)
         USART1_Printf("IndoorTemperature:%d", (int)temperature);
         OLED_ShowNum(1, 1, temperature, 2);
         OLED_ShowNum(2, 1, humidity, 2);
-        MPU6050_GetData();
-        MPU6050_Gyro_Attitude_Cal(86);
-        
-        OLED_ShowString(4, 1, "AX:");
-        OLED_ShowNum(4, 4, AX, 6);
-        OLED_ShowString(5, 1, "AY:");
-        OLED_ShowNum(5, 4, AY, 6);
-        OLED_ShowString(6, 1, "AZ:");
-        OLED_ShowNum(6, 4, AZ, 6);
+
+        mpu_dmp_get_data1(&pitch, &roll, &yaw);
+
         // USART1_SendNumber(GX);
         // APP_LED_blink();
 

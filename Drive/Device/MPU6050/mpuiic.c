@@ -1,5 +1,5 @@
 #include "mpuiic.h"
-#include "delay.h"
+#include "Delay.h"
 
 void MPU_SDA_IN(void)
 {
@@ -28,10 +28,11 @@ void MPU_SDA_OUT(void)
 // MPU IIC 延时函数
 void MPU_IIC_Delay(void)
 {
-    Delay_Us(2);
+    Delay_us(2);
 }
 
 // 初始化IIC
+//SCL B8 SDA B9
 void MPU_IIC_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;

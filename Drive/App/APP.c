@@ -9,6 +9,7 @@ void SYS_Init(void)
     APP_SHT30_init();
     APP_Uart_send_init();
     APP_TIM_init();
+    APP_6050_init();
 
     // Tim_task_init(); // 启动调度
 }
