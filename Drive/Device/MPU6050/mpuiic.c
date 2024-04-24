@@ -1,150 +1,116 @@
 #include "mpuiic.h"
 #include "Delay.h"
 
-void MPU_SDA_IN(void)
+void MyI2C_W_SCL(uint8_t BitValue)
 {
-    // PB8,PB9 输出高
-    GPIO_InitTypeDef GPIO_InitStructure;
-
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); // 使能PORTA,PORTE时钟
-
-    GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_9;    // KEY0-KEY1
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; // 设置成上拉输入
-    GPIO_Init(GPIOB, &GPIO_InitStructure);        // 初始化GPIOE4,3
+    GPIO_WriteBit(GPIOB, GPIO_Pin_10, (BitAction)BitValue);
+    Delay_us(10);
 }
 
-void MPU_SDA_OUT(void)
+void MyI2C_W_SDA(uint8_t BitValue)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); // 先使能外设IO PORTB时钟
-
-    GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_9;       // 端口配置
-    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP; // 推挽输出
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; // IO口速度为50MHz
-    GPIO_Init(GPIOB, &GPIO_InitStructure);            // 根据设定参数初始化GPIO
+    GPIO_WriteBit(GPIOB, GPIO_Pin_11, (BitAction)BitValue);
+    Delay_us(10);
 }
 
-// MPU IIC 延时函数
-void MPU_IIC_Delay(void)
+uint8_t MyI2C_R_SDA(void)
 {
-    Delay_us(2);
+    uint8_t BitValue;
+    BitValue = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_11);
+    Delay_us(10);
+    return BitValue;
 }
 
 // 初始化IIC
-//SCL B8 SDA B9
+// SCL B8 SDA B9
 void MPU_IIC_Init(void)
 {
+    // SCL--B10,SDA--B11
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+
     GPIO_InitTypeDef GPIO_InitStructure;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_OD;
+    GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_10 | GPIO_Pin_11;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); // 先使能外设IO PORTB时钟
-
-    GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_8 | GPIO_Pin_9; // 端口配置
-    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;        // 推挽输出
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;        // IO口速度为50MHz
-    GPIO_Init(GPIOB, &GPIO_InitStructure);                   // 根据设定参数初始化GPIO
-
-    GPIO_SetBits(GPIOB, GPIO_Pin_8 | GPIO_Pin_9); // PB8,PB9 输出高
+    GPIO_SetBits(GPIOB, GPIO_Pin_10 | GPIO_Pin_11);
 }
+
 // 产生IIC起始信号
 void MPU_IIC_Start(void)
 {
-    MPU_SDA_OUT(); // sda线输出
-    MPU_IIC_SDA = 1;
-    MPU_IIC_SCL = 1;
-    MPU_IIC_Delay();
-    MPU_IIC_SDA = 0; // START:when CLK is high,DATA change form high to low
-    MPU_IIC_Delay();
-    MPU_IIC_SCL = 0; // 钳住I2C总线，准备发送或接收数据
+    MyI2C_W_SDA(1);
+    MyI2C_W_SCL(1);
+    MyI2C_W_SDA(0);
+    MyI2C_W_SCL(0);
 }
 // 产生IIC停止信号
 void MPU_IIC_Stop(void)
 {
-    MPU_SDA_OUT(); // sda线输出
-    MPU_IIC_SCL = 0;
-    MPU_IIC_SDA = 0; // STOP:when CLK is high DATA change form low to high
-    MPU_IIC_Delay();
-    MPU_IIC_SCL = 1;
-    MPU_IIC_SDA = 1; // 发送I2C总线结束信号
-    MPU_IIC_Delay();
+    MyI2C_W_SDA(0);
+    MyI2C_W_SCL(1);
+    MyI2C_W_SDA(1);
 }
 // 等待应答信号到来
 // 返回值：1，接收应答失败
 //         0，接收应答成功
 u8 MPU_IIC_Wait_Ack(void)
 {
-    u8 ucErrTime = 0;
-    MPU_SDA_IN(); // SDA设置为输入
-    MPU_IIC_SDA = 1;
-    MPU_IIC_Delay();
-    MPU_IIC_SCL = 1;
-    MPU_IIC_Delay();
-    while (MPU_READ_SDA) {
-        ucErrTime++;
-        if (ucErrTime > 250) {
-            MPU_IIC_Stop();
-            return 1;
-        }
-    }
-    MPU_IIC_SCL = 0; // 时钟输出0
-    return 0;
+    uint8_t AckBit;
+    MyI2C_W_SDA(1);
+    MyI2C_W_SCL(1);
+    AckBit = MyI2C_R_SDA();
+    MyI2C_W_SCL(0);
+    return AckBit;
 }
+
 // 产生ACK应答
-void MPU_IIC_Ack(void)
-{
-    MPU_IIC_SCL = 0;
-    MPU_SDA_OUT();
-    MPU_IIC_SDA = 0;
-    MPU_IIC_Delay();
-    MPU_IIC_SCL = 1;
-    MPU_IIC_Delay();
-    MPU_IIC_SCL = 0;
-}
-// 不产生ACK应答
-void MPU_IIC_NAck(void)
-{
-    MPU_IIC_SCL = 0;
-    MPU_SDA_OUT();
-    MPU_IIC_SDA = 1;
-    MPU_IIC_Delay();
-    MPU_IIC_SCL = 1;
-    MPU_IIC_Delay();
-    MPU_IIC_SCL = 0;
-}
+// void MPU_IIC_Ack(void)
+// {
+//     MPU_IIC_SCL = 0;
+//     MPU_SDA_OUT();
+//     MPU_IIC_SDA = 0;
+//     MPU_IIC_Delay();
+//     MPU_IIC_SCL = 1;
+//     MPU_IIC_Delay();
+//     MPU_IIC_SCL = 0;
+// }
+// // 不产生ACK应答
+// void MPU_IIC_NAck(void)
+// {
+//     MPU_IIC_SCL = 0;
+//     MPU_SDA_OUT();
+//     MPU_IIC_SDA = 1;
+//     MPU_IIC_Delay();
+//     MPU_IIC_SCL = 1;
+//     MPU_IIC_Delay();
+//     MPU_IIC_SCL = 0;
+// }
+
 // IIC发送一个字节
 // 返回从机有无应答
 // 1，有应答
 // 0，无应答
 void MPU_IIC_Send_Byte(u8 txd)
 {
-    u8 t;
-    MPU_SDA_OUT();
-    MPU_IIC_SCL = 0; // 拉低时钟开始数据传输
-    for (t = 0; t < 8; t++) {
-        MPU_IIC_SDA = (txd & 0x80) >> 7;
-        txd <<= 1;
-        MPU_IIC_SCL = 1;
-        MPU_IIC_Delay();
-        MPU_IIC_SCL = 0;
-        MPU_IIC_Delay();
+    uint8_t i;
+    for (i = 0; i < 8; i++) {
+        MyI2C_W_SDA(txd & (0x80 >> i));
+        MyI2C_W_SCL(1);
+        MyI2C_W_SCL(0);
     }
 }
 // 读1个字节，ack=1时，发送ACK，ack=0，发送nACK
-u8 MPU_IIC_Read_Byte(unsigned char ack)
+u8 MPU_IIC_Read_Byte()
 {
-    unsigned char i, receive = 0;
-    MPU_SDA_IN(); // SDA设置为输入
+
+    uint8_t i, Byte = 0x00;
+    MyI2C_W_SDA(1);
     for (i = 0; i < 8; i++) {
-        MPU_IIC_SCL = 0;
-        MPU_IIC_Delay();
-        MPU_IIC_SCL = 1;
-        receive <<= 1;
-        if (MPU_READ_SDA) receive++;
-        MPU_IIC_Delay();
+        MyI2C_W_SCL(1);
+        if (MyI2C_R_SDA() == 1) { Byte |= (0x80 >> i); }
+        MyI2C_W_SCL(0);
     }
-    if (!ack)
-        MPU_IIC_NAck(); // 发送nACK
-    else
-        MPU_IIC_Ack(); // 发送ACK
-    return receive;
+    return Byte;
 }

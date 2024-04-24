@@ -35,7 +35,19 @@ void TIM2_IRQHandler(void)
         OLED_ShowNum(1, 1, temperature, 2);
         OLED_ShowNum(2, 1, humidity, 2);
 
-        mpu_dmp_get_data1(&pitch, &roll, &yaw);
+        // GPS_read();
+        // USART1_Printf("Latitude:");
+        // USART1_Printf(GNRMC_Info.latitude);
+        // USART1_Printf("Longitude:");
+        // USART1_Printf(GNRMC_Info.longitude);
+
+        if (mpu_dmp_get_data(&pitch, &roll, &yaw)) {
+            // OLED_ShowString(6, 1, "failed!");
+        };
+
+        OLED_ShowNum(3, 1, pitch, 8);
+        OLED_ShowNum(4, 1, roll, 8);
+        OLED_ShowNum(5, 1, yaw, 8);
 
         // USART1_SendNumber(GX);
         // APP_LED_blink();

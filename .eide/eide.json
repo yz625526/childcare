@@ -53,9 +53,6 @@
                 "path": "Drive/Device/ADC.c"
               },
               {
-                "path": "Drive/Device/AIR780GE.c"
-              },
-              {
                 "path": "Drive/Device/ATGM336H.c"
               },
               {
@@ -268,7 +265,6 @@
         "<virtual_root>/Drive/Hardware/ADC.c",
         "<virtual_root>/Library/stm32f10x_rtc.c",
         "<virtual_root>/Drive/Device/OLED_1_3.c",
-        "<virtual_root>/Drive/Device/ATGM336H.c",
         "<virtual_root>/Drive/Device/AIR780GE.c",
         "<virtual_root>/Drive/Device/KEY.c",
         "<virtual_root>/Drive/Library/stm32f10x_adc.c",

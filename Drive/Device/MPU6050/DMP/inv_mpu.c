@@ -26,6 +26,7 @@
 #include "inv_mpu_dmp_motion_driver.h"
 #include "mpu6050.h"
 #include "Delay.h"
+#include "OLED.h"
 
 #define MPU6050                     // 定义我们使用的传感器为MPU6050
 #define MOTION_DRIVER_TARGET_MSP430 // 定义驱动部分,采用MSP430的驱动(移植到STM32F1)
@@ -2898,6 +2899,7 @@ u8 run_self_test(void)
     } else
         return 1;
 }
+
 // 陀螺仪方向控制
 unsigned short inv_orientation_matrix_to_scalar(
     const signed char *mtx)
@@ -2918,6 +2920,7 @@ unsigned short inv_orientation_matrix_to_scalar(
 
     return scalar;
 }
+
 // 方向转换
 unsigned short inv_row_2_scale(const signed char *row)
 {
@@ -2939,20 +2942,56 @@ unsigned short inv_row_2_scale(const signed char *row)
         b = 7; // error
     return b;
 }
+
 // 空函数,未用到.
 void mget_ms(unsigned long *time)
 {
 }
+// // mpu6050,dmp初始化
+// // 返回值:0,正常
+// //     其他,失败
+// u8 mpu_dmp_init(void)
+// {
+//     u8 res = 0;
+//     MPU_IIC_Init();      // 初始化IIC总线
+//     if (mpu_init() == 0) // 初始化MPU6050
+//     {
+
+//         res = mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL); // 设置所需要的传感器
+//         if (res) return 1;
+//         res = mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL); // 设置FIFO
+//         if (res) return 2;
+//         res = mpu_set_sample_rate(DEFAULT_MPU_HZ); // 设置采样率
+//         if (res) return 3;
+//         res = dmp_load_motion_driver_firmware(); // 加载dmp固件
+//         if (res) return 4;
+//         res = dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_orientation)); // 设置陀螺仪方向
+//         if (res) return 5;
+//         res = dmp_enable_feature(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_TAP | // 设置dmp功能
+//                                  DMP_FEATURE_ANDROID_ORIENT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO |
+//                                  DMP_FEATURE_GYRO_CAL);
+//         if (res) return 6;
+//         res = dmp_set_fifo_rate(DEFAULT_MPU_HZ); // 设置DMP输出速率(最大不超过200Hz)
+//         if (res) return 7;
+//         res = run_self_test(); // 自检
+//         if (res) return 8;
+//         res = mpu_set_dmp_state(1); // 使能DMP
+//         if (res) return 9;
+
+//     } else
+//         return 10;
+//     return 0;
+// }
 // mpu6050,dmp初始化
 // 返回值:0,正常
-//     其他,失败
+//    其他,失败
 u8 mpu_dmp_init(void)
 {
     u8 res = 0;
     MPU_IIC_Init();      // 初始化IIC总线
     if (mpu_init() == 0) // 初始化MPU6050
     {
-
+        OLED_ShowString(6, 1, "failed!");
         res = mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL); // 设置所需要的传感器
         if (res) return 1;
         res = mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL); // 设置FIFO
@@ -2973,11 +3012,48 @@ u8 mpu_dmp_init(void)
         if (res) return 8;
         res = mpu_set_dmp_state(1); // 使能DMP
         if (res) return 9;
-
     } else
         return 10;
     return 0;
 }
+
+// // 得到dmp处理后的数据(注意,本函数需要比较多堆栈,局部变量有点多)
+// // pitch:俯仰角 精度:0.1°   范围:-90.0° <---> +90.0°
+// // roll:横滚角  精度:0.1°   范围:-180.0°<---> +180.0°
+// // yaw:航向角   精度:0.1°   范围:-180.0°<---> +180.0°
+// // 返回值:0,正常
+// //     其他,失败
+// u8 mpu_dmp_get_data(float *pitch, float *roll, float *yaw)
+// {
+//     float q0 = 1.0f, q1 = 0.0f, q2 = 0.0f, q3 = 0.0f;
+//     unsigned long sensor_timestamp;
+//     short gyro[3], accel[3], sensors;
+//     unsigned char more;
+//     long quat[4];
+//     if (dmp_read_fifo(gyro, accel, quat, &sensor_timestamp, &sensors, &more)) return 1;
+//     /* Gyro and accel data are written to the FIFO by the DMP in chip frame and hardware units.
+//      * This behavior is convenient because it keeps the gyro and accel outputs of dmp_read_fifo and mpu_read_fifo consistent.
+//      **/
+//     /*if (sensors & INV_XYZ_GYRO )
+//     send_packet(PACKET_TYPE_GYRO, gyro);
+//     if (sensors & INV_XYZ_ACCEL)
+//     send_packet(PACKET_TYPE_ACCEL, accel); */
+//     /* Unlike gyro and accel, quaternions are written to the FIFO in the body frame, q30.
+//      * The orientation is set by the scalar passed to dmp_set_orientation during initialization.
+//      **/
+//     if (sensors & INV_WXYZ_QUAT) {
+//         q0 = quat[0] / q30; // q30格式转换为浮点数
+//         q1 = quat[1] / q30;
+//         q2 = quat[2] / q30;
+//         q3 = quat[3] / q30;
+//         // 计算得到俯仰角/横滚角/航向角
+//         *pitch = asin(-2 * q1 * q3 + 2 * q0 * q2) * 57.3;                                      // pitch
+//         *roll  = atan2(2 * q2 * q3 + 2 * q0 * q1, -2 * q1 * q1 - 2 * q2 * q2 + 1) * 57.3;      // roll
+//         *yaw   = atan2(2 * (q1 * q2 + q0 * q3), q0 * q0 + q1 * q1 - q2 * q2 - q3 * q3) * 57.3; // yaw
+//     } else
+//         return 2;
+//     return 0;
+// }
 
 // 得到dmp处理后的数据(注意,本函数需要比较多堆栈,局部变量有点多)
 // pitch:俯仰角 精度:0.1°   范围:-90.0° <---> +90.0°
@@ -3004,6 +3080,7 @@ u8 mpu_dmp_get_data(float *pitch, float *roll, float *yaw)
      * The orientation is set by the scalar passed to dmp_set_orientation during initialization.
      **/
     if (sensors & INV_WXYZ_QUAT) {
+
         q0 = quat[0] / q30; // q30格式转换为浮点数
         q1 = quat[1] / q30;
         q2 = quat[2] / q30;
