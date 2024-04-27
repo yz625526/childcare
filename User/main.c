@@ -12,6 +12,7 @@ int main(void)
     // float humidity;    // relative humidity [%RH]
 
     SYS_Init();
+    
 
     while (1)
     {
