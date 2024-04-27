@@ -25,28 +25,28 @@ void APP_TIM_init()
     TIM_Cmd(TIM2, ENABLE);
 }
 
-void TIM2_IRQHandler(void)
-{
-    if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET) {
-        // 处理定时器2中断事件
-        // ...
-        SHT3X_GetTempAndHumi(&temperature, &humidity, REPEATAB_HIGH, MODE_CLKSTRETCH, 50); // 读取sht30值
-        USART1_Printf("IndoorTemperature:%d", (int)temperature);
-        OLED_ShowNum(1, 1, temperature, 2);
-        OLED_ShowNum(2, 1, humidity, 2);
-        MPU6050_GetData();
-        MPU6050_Gyro_Attitude_Cal(86);
+// void TIM2_IRQHandler(void)
+// {
+//     if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET) {
+//         // 处理定时器2中断事件
+//         // ...
+//         SHT3X_GetTempAndHumi(&temperature, &humidity, REPEATAB_HIGH, MODE_CLKSTRETCH, 50); // 读取sht30值
+//         USART1_Printf("IndoorTemperature:%d", (int)temperature);
+//         OLED_ShowNum(1, 1, temperature, 2);
+//         OLED_ShowNum(2, 1, humidity, 2);
+//         MPU6050_GetData();
+//         MPU6050_Gyro_Attitude_Cal(86);
         
-        OLED_ShowString(4, 1, "AX:");
-        OLED_ShowNum(4, 4, AX, 6);
-        OLED_ShowString(5, 1, "AY:");
-        OLED_ShowNum(5, 4, AY, 6);
-        OLED_ShowString(6, 1, "AZ:");
-        OLED_ShowNum(6, 4, AZ, 6);
-        // USART1_SendNumber(GX);
-        // APP_LED_blink();
+//         OLED_ShowString(4, 1, "AX:");
+//         OLED_ShowNum(4, 4, AX, 6);
+//         OLED_ShowString(5, 1, "AY:");
+//         OLED_ShowNum(5, 4, AY, 6);
+//         OLED_ShowString(6, 1, "AZ:");
+//         OLED_ShowNum(6, 4, AZ, 6);
+//         // USART1_SendNumber(GX);
+//         // APP_LED_blink();
 
-        // 清除中断标志位
-        TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-    }
-}
+//         // 清除中断标志位
+//         TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+//     }
+// }

@@ -1,0 +1,284 @@
+{
+  "name": "MPU6050",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "USER",
+        "files": [
+          {
+            "path": "USER/main.c"
+          },
+          {
+            "path": "USER/stm32f10x_it.c"
+          },
+          {
+            "path": "USER/system_stm32f10x.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "HARDWARE",
+        "files": [
+          {
+            "path": "HARDWARE/LED/led.c"
+          },
+          {
+            "path": "HARDWARE/KEY/key.c"
+          },
+          {
+            "path": "HARDWARE/LCD/lcd.c"
+          },
+          {
+            "path": "HARDWARE/MPU6050/mpuiic.c"
+          },
+          {
+            "path": "HARDWARE/MPU6050/mpu6050.c"
+          },
+          {
+            "path": "HARDWARE/MPU6050/eMPL/inv_mpu_dmp_motion_driver.c"
+          },
+          {
+            "path": "HARDWARE/MPU6050/eMPL/inv_mpu.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "SYSTEM",
+        "files": [
+          {
+            "path": "SYSTEM/delay/delay.c"
+          },
+          {
+            "path": "SYSTEM/sys/sys.c"
+          },
+          {
+            "path": "SYSTEM/usart/usart.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "CORE",
+        "files": [
+          {
+            "path": "CORE/core_cm3.c"
+          },
+          {
+            "path": "CORE/startup_stm32f10x_hd.s"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "FWLib",
+        "files": [
+          {
+            "path": "STM32F10x_FWLib/src/stm32f10x_gpio.c"
+          },
+          {
+            "path": "STM32F10x_FWLib/src/stm32f10x_rcc.c"
+          },
+          {
+            "path": "STM32F10x_FWLib/src/stm32f10x_usart.c"
+          },
+          {
+            "path": "STM32F10x_FWLib/src/misc.c"
+          },
+          {
+            "path": "STM32F10x_FWLib/src/stm32f10x_tim.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "USMART",
+        "files": [
+          {
+            "path": "USMART/usmart.c"
+          },
+          {
+            "path": "USMART/usmart_config.c"
+          },
+          {
+            "path": "USMART/usmart_str.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "README",
+        "files": [],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {},
+  "targets": {
+    "MPU6050": {
+      "excludeList": [],
+      "toolchain": "AC5",
+      "compileConfig": {
+        "cpuType": "Cortex-M3",
+        "floatingPointHardware": "none",
+        "scatterFilePath": "",
+        "useCustomScatterFile": false,
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "RAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0xc000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "ROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x8000000",
+                "size": "0x40000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            },
+            {
+              "tag": "IROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "null",
+          "cpuName": "null"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "custom_dep": {
+        "name": "default",
+        "sourceDirList": [],
+        "libList": [],
+        "incList": [
+          "HARDWARE/LED",
+          "SYSTEM/delay",
+          "SYSTEM/sys",
+          "SYSTEM/usart",
+          "USER",
+          "STM32F10x_FWLib/inc",
+          "CORE",
+          "HARDWARE/LCD",
+          "HARDWARE/KEY",
+          "HARDWARE/MPU6050",
+          "HARDWARE/MPU6050/eMPL",
+          "USMART",
+          ".cmsis/include",
+          "USER/RTE/_MPU6050"
+        ],
+        "defineList": [
+          "STM32F10X_HD",
+          "USE_STDPERIPH_DRIVER"
+        ]
+      }
+    }
+  },
+  "version": "3.3"
+}
