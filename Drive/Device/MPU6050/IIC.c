@@ -50,6 +50,31 @@ void MyI2C_Stop(void)
     MyI2C_W_SDA(1);
 }
 
+// 等待应答信号到来
+// 返回值：1，接收应答失败
+//         0，接收应答成功
+uint8_t MyI2C_ReceiveAck(void)
+{
+    uint8_t AckBit;
+    MyI2C_W_SDA(1);
+    MyI2C_W_SCL(1);
+    AckBit = MyI2C_R_SDA();
+    MyI2C_W_SCL(0);
+    return AckBit;
+}
+
+//产生ACK应答
+void MyI2C_SendAck(uint8_t AckBit)
+{
+    MyI2C_W_SDA(AckBit);
+    MyI2C_W_SCL(1);
+    MyI2C_W_SCL(0);
+}
+
+//IIC发送一个字节
+//返回从机有无应答
+//1，有应答
+//0，无应答		
 void MyI2C_SendByte(uint8_t Byte)
 {
     uint8_t i;
@@ -60,7 +85,7 @@ void MyI2C_SendByte(uint8_t Byte)
     }
 }
 
-uint8_t MyI2C_ReceiveByte(void)
+uint8_t MyI2C_ReceiveByte(unsigned char ack)
 {
     uint8_t i, Byte = 0x00;
     MyI2C_W_SDA(1);
@@ -69,22 +94,9 @@ uint8_t MyI2C_ReceiveByte(void)
         if (MyI2C_R_SDA() == 1) { Byte |= (0x80 >> i); }
         MyI2C_W_SCL(0);
     }
+    if (!ack)
+        MyI2C_SendAck();//发送nACK
+    else
+        MyI2C_SendAck(); //发送ACK   
     return Byte;
-}
-
-void MyI2C_SendAck(uint8_t AckBit)
-{
-    MyI2C_W_SDA(AckBit);
-    MyI2C_W_SCL(1);
-    MyI2C_W_SCL(0);
-}
-
-uint8_t MyI2C_ReceiveAck(void)
-{
-    uint8_t AckBit;
-    MyI2C_W_SDA(1);
-    MyI2C_W_SCL(1);
-    AckBit = MyI2C_R_SDA();
-    MyI2C_W_SCL(0);
-    return AckBit;
 }
