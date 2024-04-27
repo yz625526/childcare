@@ -30,7 +30,7 @@
 #include "OLED.h"
 #include "LED.h"
 #include "IIC.h"
-#include "MPU6050.h"
+#include "mpu6050.h"
 // #include "ATGM336H.h"
 #include "SHT30.h"
 // #include "KEY.h"
@@ -42,6 +42,7 @@
 #include "APP_OLED.h"
 #include "APP_SHT30.h"
 #include "APP_TIM_refresh.h"
+#include "APP_MPU6050.h"
 
 
 #include "stdio.h"

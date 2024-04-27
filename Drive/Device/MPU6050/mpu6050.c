@@ -13,7 +13,7 @@ u8 MPU_Init(void)
     u8 res;
     MyI2C_Init();                            // 初始化IIC总线
     MPU_Write_Byte(MPU_PWR_MGMT1_REG, 0X80); // 复位MPU6050
-    delay_ms(100);
+    Delay_ms(100);
     MPU_Write_Byte(MPU_PWR_MGMT1_REG, 0X00); // 唤醒MPU6050
     MPU_Set_Gyro_Fsr(3);                     // 陀螺仪传感器,±2000dps
     MPU_Set_Accel_Fsr(0);                    // 加速度传感器,±2g
@@ -30,6 +30,7 @@ u8 MPU_Init(void)
         MPU_Set_Rate(50);                        // 设置采样率为50Hz
     } else
         return 1;
+    printf("6050initdone");
     return 0;
 }
 // 设置MPU6050陀螺仪传感器满量程范围
@@ -182,11 +183,11 @@ u8 MPU_Read_Len(u8 addr, u8 reg, u8 len, u8 *buf)
     MyI2C_ReceiveAck();              // 等待应答
     while (len) {
         if (len == 1) {
-            *buf = MyI2C_ReceiveByte(0); // 读数据
+            *buf = MyI2C_ReceiveByte(); // 读数据
             MyI2C_SendAck(1);            // 发送nACK
         } else {
-            *buf = MyI2C_ReceiveByte(1); // 读数据
-            MyI2C_SendAck(1);            // 发送ACK
+            *buf = MyI2C_ReceiveByte(); // 读数据
+            MyI2C_SendAck(0);            // 发送ACK
         }
         len--;
         buf++;

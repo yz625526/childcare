@@ -11,7 +11,7 @@ int main(void)
     // float temperature; // temperature [°„C]
     // float humidity;    // relative humidity [%RH]
 
-    // SYS_Init();
+    SYS_Init();
 
 
     while (1) {

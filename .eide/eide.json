@@ -86,7 +86,33 @@
                 "path": "Drive/Device/USART.c"
               }
             ],
-            "folders": []
+            "folders": [
+              {
+                "name": "MPU6050",
+                "files": [
+                  {
+                    "path": "Drive/Device/MPU6050/IIC.c"
+                  },
+                  {
+                    "path": "Drive/Device/MPU6050/mpu6050.c"
+                  }
+                ],
+                "folders": [
+                  {
+                    "name": "eMPL",
+                    "files": [
+                      {
+                        "path": "Drive/Device/MPU6050/eMPL/inv_mpu_dmp_motion_driver.c"
+                      },
+                      {
+                        "path": "Drive/Device/MPU6050/eMPL/inv_mpu.c"
+                      }
+                    ],
+                    "folders": []
+                  }
+                ]
+              }
+            ]
           },
           {
             "name": "Library",
@@ -266,7 +292,8 @@
         "<virtual_root>/Drive/Library/stm32f10x_spi.c",
         "<virtual_root>/Drive/Library/stm32f10x_wwdg.c",
         "<virtual_root>/Drive/Device/ADC.c",
-        "<virtual_root>/Drive/Device/OLED_TEST.c"
+        "<virtual_root>/Drive/Device/OLED_TEST.c",
+        "<virtual_root>/Drive/Device/MPU6050.c"
       ],
       "toolchain": "AC5",
       "compileConfig": {
@@ -332,7 +359,9 @@
           "Drive/Library",
           "Drive/App",
           "Drive/Task",
-          "User"
+          "User",
+          "Drive/Device/MPU6050",
+          "Drive/Device/MPU6050/eMPL"
         ],
         "libList": [],
         "sourceDirList": [],

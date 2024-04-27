@@ -25,7 +25,7 @@
 #include "inv_mpu.h"
 #include "inv_mpu_dmp_motion_driver.h"
 #include "mpu6050.h"
-#include "delay.h"
+#include "Delay.h"
 #include "usart.h"
 
 
@@ -52,7 +52,7 @@
 
 #define i2c_write   MPU_Write_Len
 #define i2c_read    MPU_Read_Len
-#define delay_ms    delay_ms
+#define delay_ms    Delay_ms
 #define get_ms      mget_ms
 //static inline int reg_int_cb(struct int_param_s *int_param)
 //{
@@ -2955,7 +2955,7 @@ void mget_ms(unsigned long *time)
 u8 mpu_dmp_init(void)
 {
 	u8 res=0;
-	MPU_IIC_Init(); 	//初始化IIC总线
+	MyI2C_Init(); 	//初始化IIC总线
 	if(mpu_init()==0)	//初始化MPU6050
 	{	 
 		res=mpu_set_sensors(INV_XYZ_GYRO|INV_XYZ_ACCEL);//设置所需要的传感器
