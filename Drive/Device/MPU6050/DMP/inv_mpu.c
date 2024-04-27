@@ -2988,7 +2988,7 @@ void mget_ms(unsigned long *time)
 u8 mpu_dmp_init(void)
 {
     u8 res = 0;
-    MPU_IIC_Init();      // 初始化IIC总线
+    // MPU_IIC_Init();      // 初始化IIC总线,// SCL--B10,SDA--B11
     if (mpu_init() == 0) // 初始化MPU6050
     {
         OLED_ShowString(6, 1, "failed!");
