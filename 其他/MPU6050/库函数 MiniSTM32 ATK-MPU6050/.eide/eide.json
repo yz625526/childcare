@@ -2,7 +2,9 @@
   "name": "MPU6050",
   "type": "ARM",
   "dependenceList": [],
-  "srcDirs": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
   "virtualFolder": {
     "name": "<virtual_root>",
     "files": [],
@@ -122,7 +124,9 @@
   "outDir": "build",
   "deviceName": null,
   "packDir": null,
-  "miscInfo": {},
+  "miscInfo": {
+    "uid": "7665c90b158ae4d6dfe7fd989058ccc0"
+  },
   "targets": {
     "MPU6050": {
       "excludeList": [],
@@ -255,8 +259,6 @@
       "uploadConfigMap": {},
       "custom_dep": {
         "name": "default",
-        "sourceDirList": [],
-        "libList": [],
         "incList": [
           "HARDWARE/LED",
           "SYSTEM/delay",
@@ -271,8 +273,11 @@
           "HARDWARE/MPU6050/eMPL",
           "USMART",
           ".cmsis/include",
-          "USER/RTE/_MPU6050"
+          "USER/RTE/_MPU6050",
+          ".eide/deps"
         ],
+        "libList": [],
+        "sourceDirList": [],
         "defineList": [
           "STM32F10X_HD",
           "USE_STDPERIPH_DRIVER"
