@@ -36,6 +36,12 @@
               },
               {
                 "path": "Drive/App/APP_UART_Send.c"
+              },
+              {
+                "path": "Drive/App/APP.c"
+              },
+              {
+                "path": "Drive/App/Task_use_TIM.c"
               }
             ],
             "folders": []
@@ -44,22 +50,19 @@
             "name": "Device",
             "files": [
               {
+                "path": "Drive/Device/ADC.c"
+              },
+              {
                 "path": "Drive/Device/ATGM336H.c"
               },
               {
                 "path": "Drive/Device/Delay.c"
               },
               {
-                "path": "Drive/Device/IIC.c"
-              },
-              {
                 "path": "Drive/Device/KEY.c"
               },
               {
                 "path": "Drive/Device/LED.c"
-              },
-              {
-                "path": "Drive/Device/MPU6050.c"
               },
               {
                 "path": "Drive/Device/OLED.c"
@@ -74,7 +77,33 @@
                 "path": "Drive/Device/USART.c"
               }
             ],
-            "folders": []
+            "folders": [
+              {
+                "name": "MPU6050",
+                "files": [
+                  {
+                    "path": "Drive/Device/MPU6050/mpu6050.c"
+                  },
+                  {
+                    "path": "Drive/Device/MPU6050/mpuiic.c"
+                  }
+                ],
+                "folders": [
+                  {
+                    "name": "DMP",
+                    "files": [
+                      {
+                        "path": "Drive/Device/MPU6050/DMP/inv_mpu_dmp_motion_driver.c"
+                      },
+                      {
+                        "path": "Drive/Device/MPU6050/DMP/inv_mpu.c"
+                      }
+                    ],
+                    "folders": []
+                  }
+                ]
+              }
+            ]
           },
           {
             "name": "Library",
@@ -318,7 +347,10 @@
           "Drive/Device",
           "Drive/Library",
           "Drive/App",
-          "User"
+          "Drive/Task",
+          "User",
+          "Drive/Device/MPU6050",
+          "Drive/Device/MPU6050/DMP"
         ],
         "libList": [],
         "sourceDirList": [],
