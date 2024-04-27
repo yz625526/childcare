@@ -34,12 +34,17 @@ void TIM2_IRQHandler(void)
         USART1_Printf("IndoorTemperature:%d", (int)temperature);
         OLED_ShowNum(1, 1, temperature, 2);
         OLED_ShowNum(2, 1, humidity, 2);
-        
-        OLED_ShowString(4, 1, "AX:");
-        // OLED_ShowNum(4, 4, AX, 6);
-        OLED_ShowString(5, 1, "AY:");
-        // OLED_ShowNum(5, 4, AY, 6);
-        OLED_ShowString(6, 1, "AZ:");
+
+        MPU_Get_Accelerometer(&aacx, &aacy, &aacz); // 得到加速度传感器数据
+        if (mpu_dmp_get_data(&pitch, &roll, &yaw) == 0) {
+            OLED_ShowString(4, 1, "AX:");
+            OLED_ShowNum(4, 4, (int)(pitch * 100), 5);
+            OLED_ShowString(5, 1, "AY:");
+            OLED_ShowNum(5, 4, (int)(roll * 100), 5);
+            OLED_ShowString(6, 1, "AZ:");
+        }
+        else
+            OLED_ShowString(7, 1, "6050read error");
         // OLED_ShowNum(6, 4, AZ, 6);
         // USART1_SendNumber(GX);
         // APP_LED_blink();

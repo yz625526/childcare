@@ -31,6 +31,7 @@
 #include "LED.h"
 #include "IIC.h"
 #include "mpu6050.h"
+#include "inv_mpu.h"
 // #include "ATGM336H.h"
 #include "SHT30.h"
 // #include "KEY.h"
