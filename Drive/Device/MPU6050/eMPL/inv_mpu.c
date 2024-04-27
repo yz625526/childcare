@@ -2902,6 +2902,7 @@ u8 run_self_test(void)
 		return 0;
 	}else return 1;
 }
+
 //陀螺仪方向控制
 unsigned short inv_orientation_matrix_to_scalar(
     const signed char *mtx)
@@ -2923,6 +2924,7 @@ unsigned short inv_orientation_matrix_to_scalar(
 
     return scalar;
 }
+
 //方向转换
 unsigned short inv_row_2_scale(const signed char *row)
 {
@@ -2944,11 +2946,13 @@ unsigned short inv_row_2_scale(const signed char *row)
         b = 7;      // error
     return b;
 }
+
 //空函数,未用到.
 void mget_ms(unsigned long *time)
 {
 
 }
+
 //mpu6050,dmp初始化
 //返回值:0,正常
 //    其他,失败
