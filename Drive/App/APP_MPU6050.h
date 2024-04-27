@@ -3,8 +3,7 @@
 
 #include "stm32f10x_conf.h"
 
-extern float pitch,roll,yaw; //欧拉角
-
-void APP_6050_init();
+void APP_OLED_init();
+void APP_OLED_refresh();
 
 #endif

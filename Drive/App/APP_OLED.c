@@ -4,6 +4,7 @@
 
 void APP_OLED_init()
 {
+    // OLED_Init();
     OLED_Init();
 }
 

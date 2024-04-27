@@ -465,6 +465,7 @@ void USART2_IRQHandler(void)
                 memset(USART2_RX_BUF, 0, USART2_REC_LEN);                             // 清空串口1接收Buf
             }
         }
+
         // 如果接收内容超出最大长度，不再继续接收
         if (GPS_receive_count >= USART2_REC_LEN) {
             GPS_receive_count = USART2_REC_LEN;

@@ -53,16 +53,25 @@
                 "path": "Drive/Device/ADC.c"
               },
               {
+                "path": "Drive/Device/AIR780GE.c"
+              },
+              {
                 "path": "Drive/Device/ATGM336H.c"
               },
               {
                 "path": "Drive/Device/Delay.c"
               },
               {
+                "path": "Drive/Device/IIC.c"
+              },
+              {
                 "path": "Drive/Device/KEY.c"
               },
               {
                 "path": "Drive/Device/LED.c"
+              },
+              {
+                "path": "Drive/Device/MPU6050.c"
               },
               {
                 "path": "Drive/Device/OLED.c"
@@ -77,33 +86,7 @@
                 "path": "Drive/Device/USART.c"
               }
             ],
-            "folders": [
-              {
-                "name": "MPU6050",
-                "files": [
-                  {
-                    "path": "Drive/Device/MPU6050/mpu6050.c"
-                  },
-                  {
-                    "path": "Drive/Device/MPU6050/mpuiic.c"
-                  }
-                ],
-                "folders": [
-                  {
-                    "name": "DMP",
-                    "files": [
-                      {
-                        "path": "Drive/Device/MPU6050/DMP/inv_mpu_dmp_motion_driver.c"
-                      },
-                      {
-                        "path": "Drive/Device/MPU6050/DMP/inv_mpu.c"
-                      }
-                    ],
-                    "folders": []
-                  }
-                ]
-              }
-            ]
+            "folders": []
           },
           {
             "name": "Library",
@@ -265,6 +248,7 @@
         "<virtual_root>/Drive/Hardware/ADC.c",
         "<virtual_root>/Library/stm32f10x_rtc.c",
         "<virtual_root>/Drive/Device/OLED_1_3.c",
+        "<virtual_root>/Drive/Device/ATGM336H.c",
         "<virtual_root>/Drive/Device/AIR780GE.c",
         "<virtual_root>/Drive/Device/KEY.c",
         "<virtual_root>/Drive/Library/stm32f10x_adc.c",
@@ -348,9 +332,7 @@
           "Drive/Library",
           "Drive/App",
           "Drive/Task",
-          "User",
-          "Drive/Device/MPU6050",
-          "Drive/Device/MPU6050/DMP"
+          "User"
         ],
         "libList": [],
         "sourceDirList": [],

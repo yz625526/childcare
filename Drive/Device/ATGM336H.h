@@ -24,7 +24,7 @@ typedef struct {
 
 } Receive_GPS_data;
 
-extern Receive_GPS_data GNRMC_Info; // USART.c文件中使用的GPS数据结构体
+
 
 void ATGM_StructInit();
 void ParseGps();
